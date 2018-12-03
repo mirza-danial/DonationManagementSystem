@@ -24,6 +24,11 @@ public class Dashboard extends javax.swing.JFrame {
     
     public Dashboard() {
         initComponents();
+        nameLabel.setText(Login.admin.getName());
+        welcomeNameLabel.setText(Login.admin.getName());
+        totalProjectsLabel.setText(String.valueOf(Login.admin.getAllProjects().size())); //number of projects
+        //totalReceivedFundsLabel.setText(); // get value
+        totalDonorsLabel.setText(String.valueOf(Login.admin.getAllDonors().size()));
     }
 
     /**
@@ -92,6 +97,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/user.png"))); // NOI18N
 
         nameLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        nameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         nameLabel.setText("Danial Mirza");
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 2, 8)); // NOI18N
@@ -132,6 +138,9 @@ public class Dashboard extends javax.swing.JFrame {
         manageDonors.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         manageDonors.setText(" Manage Donors");
         manageDonors.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                manageDonorsMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 manageDonorsMouseEntered(evt);
             }
@@ -145,6 +154,9 @@ public class Dashboard extends javax.swing.JFrame {
         manageOrganization.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         manageOrganization.setText("  Manage  Organization");
         manageOrganization.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                manageOrganizationMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 manageOrganizationMouseEntered(evt);
             }
@@ -158,6 +170,9 @@ public class Dashboard extends javax.swing.JFrame {
         manageProjects.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         manageProjects.setText("  Manage  Projects");
         manageProjects.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                manageProjectsMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 manageProjectsMouseEntered(evt);
             }
@@ -171,6 +186,9 @@ public class Dashboard extends javax.swing.JFrame {
         manageDonations.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         manageDonations.setText("  Manage  Donations");
         manageDonations.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                manageDonationsMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 manageDonationsMouseEntered(evt);
             }
@@ -474,6 +492,35 @@ public class Dashboard extends javax.swing.JFrame {
         manageDonors.setForeground(dullGray);
     }//GEN-LAST:event_manageDonorsMouseExited
 
+    private void manageOrganizationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_manageOrganizationMouseClicked
+
+    private void manageProjectsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageProjectsMouseClicked
+        // TODO add your handling code here:
+        ManageProjects mp = new ManageProjects();
+        mp.setVisible(true);
+        
+        this.dispose();
+    }//GEN-LAST:event_manageProjectsMouseClicked
+
+    private void manageDonationsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageDonationsMouseClicked
+        // TODO add your handling code here:
+        ManageDonations md = new ManageDonations();
+        md.setVisible(true);
+        
+        this.dispose();
+    }//GEN-LAST:event_manageDonationsMouseClicked
+
+    private void manageDonorsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageDonorsMouseClicked
+        // TODO add your handling code here:
+        ManageDonors md = new ManageDonors();
+        md.setVisible(true);
+        
+        this.dispose();
+    }//GEN-LAST:event_manageDonorsMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -485,7 +532,7 @@ public class Dashboard extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

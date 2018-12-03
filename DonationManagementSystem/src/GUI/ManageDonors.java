@@ -6,7 +6,8 @@
 package GUI;
 
 import java.awt.Color;
-
+import java.util.*;
+import Model.*;
 /**
  *
  * @author Danial
@@ -18,6 +19,7 @@ public class ManageDonors extends javax.swing.JFrame {
      */
     public ManageDonors() {
         initComponents();
+        nameLabel2.setText(Login.admin.getName());
     }
 
     /**
@@ -57,6 +59,31 @@ public class ManageDonors extends javax.swing.JFrame {
         DonorGrid.setSelectionBackground(new java.awt.Color(255, 83, 61));
         DonorGrid.setSelectionForeground(new java.awt.Color(15, 22, 38));
         DonorGrid.setShowVerticalLines(false);
+        List<Donor> record = Login.admin.getAllDonors();
+        String [][] data = new String [record.size()][2];
+
+        int i = 0;
+        for(Donor d: record )
+        {
+            data[i][0] = String.valueOf(d.getId());
+            data[i][1] = d.getName();
+            i++;
+        }
+
+        DonorGrid.setModel(new javax.swing.table.DefaultTableModel(
+            data,
+            new String [] {
+                "DONOR ID", "DONOR NAME"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         DonorGrid.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DonorGridMouseClicked(evt);
@@ -73,6 +100,9 @@ public class ManageDonors extends javax.swing.JFrame {
         addDonor.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(102, 102, 102)));
         addDonor.setOpaque(true);
         addDonor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addDonorMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 addDonorMouseEntered(evt);
             }
@@ -143,6 +173,9 @@ public class ManageDonors extends javax.swing.JFrame {
         manageOrganization.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         manageOrganization.setText("  Manage  Organization");
         manageOrganization.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                manageOrganizationMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 manageOrganizationMouseEntered(evt);
             }
@@ -158,6 +191,9 @@ public class ManageDonors extends javax.swing.JFrame {
         manageProjects.setText("  Manage  Projects");
         manageProjects.setOpaque(true);
         manageProjects.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                manageProjectsMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 manageProjectsMouseEntered(evt);
             }
@@ -171,6 +207,9 @@ public class ManageDonors extends javax.swing.JFrame {
         manageDonations.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         manageDonations.setText("  Manage  Donations");
         manageDonations.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                manageDonationsMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 manageDonationsMouseEntered(evt);
             }
@@ -194,6 +233,9 @@ public class ManageDonors extends javax.swing.JFrame {
         Home.setText("  Home");
         Home.setOpaque(true);
         Home.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                HomeMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 HomeMouseEntered(evt);
             }
@@ -290,6 +332,16 @@ public class ManageDonors extends javax.swing.JFrame {
 
     private void DonorGridMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DonorGridMouseClicked
         // TODO add your handling code here:
+        int row = DonorGrid.getSelectedRow();
+        String value = DonorGrid.getModel().getValueAt(row, 0).toString();
+        
+        System.out.println(value);
+        
+        DonorDetails pd = new DonorDetails(Integer.valueOf(value));
+        pd.setVisible(true);
+        
+        this.dispose();
+        
     }//GEN-LAST:event_DonorGridMouseClicked
 
     private void addDonorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addDonorMouseEntered
@@ -374,6 +426,43 @@ public class ManageDonors extends javax.swing.JFrame {
         ManageProjectBar.repaint();
     }//GEN-LAST:event_manageProjectsMouseExited
 
+    private void HomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeMouseClicked
+        // TODO add your handling code here:
+        Dashboard d = new Dashboard();
+        d.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_HomeMouseClicked
+
+    private void manageOrganizationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_manageOrganizationMouseClicked
+
+    private void manageProjectsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageProjectsMouseClicked
+        // TODO add your handling code here:
+        ManageProjects mp = new ManageProjects();
+        mp.setVisible(true);        
+        this.dispose();
+    }//GEN-LAST:event_manageProjectsMouseClicked
+
+    private void manageDonationsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageDonationsMouseClicked
+        // TODO add your handling code here:
+        ManageDonations md = new ManageDonations();
+        md.setVisible(true);        
+        this.dispose();
+    }//GEN-LAST:event_manageDonationsMouseClicked
+
+    private void addDonorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addDonorMouseClicked
+        // TODO add your handling code here:
+        AddDonor ad = new AddDonor();
+        ad.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_addDonorMouseClicked
+                            
+
+                                         
+
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -385,7 +474,7 @@ public class ManageDonors extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

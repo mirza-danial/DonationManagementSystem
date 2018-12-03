@@ -6,7 +6,8 @@
 package GUI;
 
 import java.awt.Color;
-
+import java.util.List;
+import Model.*;
 /**
  *
  * @author Danial
@@ -20,6 +21,7 @@ public class ManageProjects extends javax.swing.JFrame {
     
     public ManageProjects() {
         initComponents();
+        nameLabel2.setText(Login.admin.getName());
     }
 
     /**
@@ -59,19 +61,16 @@ public class ManageProjects extends javax.swing.JFrame {
         ProjectGrid.setSelectionBackground(new java.awt.Color(255, 83, 61));
         ProjectGrid.setSelectionForeground(new java.awt.Color(15, 22, 38));
         ProjectGrid.setShowVerticalLines(false);
-        String [][] data = new String [2/*record.getSize()*/][2];
+        List<Project> record = Login.admin.getAllProjects();
+        String [][] data = new String [record.size()][2];
 
-        //int i = 0;
-        //for(Flight f: record.getData() )
-        //{
-            //    data[i][0] = String.valueOf(f.getFlightNum());
-            //    data[i][1] = f.getAirline();
-            //    i++;
-            // }
-        data[0][0] = "1";
-        data[0][1] = "Dam Fund Raising";
-        data[1][0] = "2";
-        data[1][1] = "Panah Gah";
+        int i = 0;
+        for(Project p: record )
+        {
+            data[i][0] = String.valueOf(p.getId());
+            data[i][1] = p.getName();
+            i++;
+        }
 
         ProjectGrid.setModel(new javax.swing.table.DefaultTableModel(
             data,
@@ -103,6 +102,9 @@ public class ManageProjects extends javax.swing.JFrame {
         addProject.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(102, 102, 102)));
         addProject.setOpaque(true);
         addProject.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addProjectMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 addProjectMouseEntered(evt);
             }
@@ -158,6 +160,9 @@ public class ManageProjects extends javax.swing.JFrame {
         manageDonors.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         manageDonors.setText(" Manage Donors");
         manageDonors.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                manageDonorsMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 manageDonorsMouseEntered(evt);
             }
@@ -171,6 +176,9 @@ public class ManageProjects extends javax.swing.JFrame {
         manageOrganization.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         manageOrganization.setText("  Manage  Organization");
         manageOrganization.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                manageOrganizationMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 manageOrganizationMouseEntered(evt);
             }
@@ -191,6 +199,9 @@ public class ManageProjects extends javax.swing.JFrame {
         manageDonations.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         manageDonations.setText("  Manage  Donations");
         manageDonations.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                manageDonationsMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 manageDonationsMouseEntered(evt);
             }
@@ -214,6 +225,9 @@ public class ManageProjects extends javax.swing.JFrame {
         Home.setText("  Home");
         Home.setOpaque(true);
         Home.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                HomeMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 HomeMouseEntered(evt);
             }
@@ -323,6 +337,16 @@ public class ManageProjects extends javax.swing.JFrame {
 
     private void ProjectGridMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProjectGridMouseClicked
         // TODO add your handling code here:
+        int row = ProjectGrid.getSelectedRow();
+        String value = ProjectGrid.getModel().getValueAt(row, 0).toString();
+        
+        System.out.println(value);
+        
+        ProjectDetails pd = new ProjectDetails(Integer.valueOf(value));
+        pd.setVisible(true);
+        
+        this.dispose();
+        
     }//GEN-LAST:event_ProjectGridMouseClicked
 
     private void manageDonorsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageDonorsMouseEntered
@@ -387,6 +411,39 @@ public class ManageProjects extends javax.swing.JFrame {
         HomeBar.repaint();
         
     }//GEN-LAST:event_HomeMouseExited
+
+    private void HomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeMouseClicked
+        // TODO add your handling code here:
+        Dashboard d = new Dashboard();
+        d.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_HomeMouseClicked
+
+    private void manageOrganizationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_manageOrganizationMouseClicked
+
+    private void manageDonationsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageDonationsMouseClicked
+        // TODO add your handling code here:
+        ManageDonations d = new ManageDonations();
+        d.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_manageDonationsMouseClicked
+
+    private void manageDonorsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageDonorsMouseClicked
+        // TODO add your handling code here:
+        ManageDonors d = new ManageDonors();
+        d.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_manageDonorsMouseClicked
+
+    private void addProjectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProjectMouseClicked
+        // TODO add your handling code here:
+        AddProject d = new AddProject();
+        d.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_addProjectMouseClicked
 
     /**
      * @param args the command line arguments

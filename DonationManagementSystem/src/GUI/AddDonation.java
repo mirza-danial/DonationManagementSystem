@@ -5,6 +5,9 @@
  */
 package GUI;
 
+import java.awt.Color;
+import java.util.*;
+import Model.*;
 /**
  *
  * @author Danial
@@ -14,8 +17,18 @@ public class AddDonation extends javax.swing.JFrame {
     /**
      * Creates new form AddDonation
      */
+    int donorID;
+    boolean donate2Project;
+    public AddDonation(int ID)
+    {
+        this();
+        donorID = ID;
+        donate2Project = false;
+    }
+    
     public AddDonation() {
         initComponents();
+        nameLabel.setText(Login.admin.getName());
     }
 
     /**
@@ -27,11 +40,12 @@ public class AddDonation extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        donationOption = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        nameLabel2 = new javax.swing.JLabel();
+        nameLabel = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         manageDonors = new javax.swing.JLabel();
         manageOrganization = new javax.swing.JLabel();
@@ -45,8 +59,17 @@ public class AddDonation extends javax.swing.JFrame {
         HomeBar = new javax.swing.JLabel();
         back = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        worthLabel = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        organization = new javax.swing.JRadioButton();
+        project = new javax.swing.JRadioButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ProjectGrid = new javax.swing.JTable();
+        confirmDonation = new javax.swing.JLabel();
+        message = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,8 +81,8 @@ public class AddDonation extends javax.swing.JFrame {
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/user.png"))); // NOI18N
 
-        nameLabel2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        nameLabel2.setText("Danial Mirza");
+        nameLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        nameLabel.setText("Danial Mirza");
 
         jLabel9.setFont(new java.awt.Font("Century Gothic", 2, 8)); // NOI18N
         jLabel9.setText("Admin");
@@ -79,7 +102,7 @@ public class AddDonation extends javax.swing.JFrame {
                                 .addGap(21, 21, 21))))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(38, 38, 38)
-                        .addComponent(nameLabel2)))
+                        .addComponent(nameLabel)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -88,7 +111,7 @@ public class AddDonation extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nameLabel2)
+                .addComponent(nameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
                 .addContainerGap(46, Short.MAX_VALUE))
@@ -101,6 +124,9 @@ public class AddDonation extends javax.swing.JFrame {
         manageDonors.setText(" Manage Donors");
         manageDonors.setOpaque(true);
         manageDonors.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                manageDonorsMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 manageDonorsMouseEntered(evt);
             }
@@ -114,6 +140,9 @@ public class AddDonation extends javax.swing.JFrame {
         manageOrganization.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         manageOrganization.setText("  Manage  Organization");
         manageOrganization.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                manageOrganizationMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 manageOrganizationMouseEntered(evt);
             }
@@ -129,6 +158,9 @@ public class AddDonation extends javax.swing.JFrame {
         manageProjects.setText("  Manage  Projects");
         manageProjects.setOpaque(true);
         manageProjects.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                manageProjectsMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 manageProjectsMouseEntered(evt);
             }
@@ -143,6 +175,9 @@ public class AddDonation extends javax.swing.JFrame {
         manageDonations.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         manageDonations.setText("  Manage  Donations");
         manageDonations.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                manageDonationsMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 manageDonationsMouseEntered(evt);
             }
@@ -166,6 +201,9 @@ public class AddDonation extends javax.swing.JFrame {
         Home.setText("  Home");
         Home.setOpaque(true);
         Home.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                HomeMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 HomeMouseEntered(evt);
             }
@@ -228,15 +266,98 @@ public class AddDonation extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel2.setText("Ammount");
 
-        jTextField1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        worthLabel.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        worthLabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                worthLabelActionPerformed(evt);
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel3.setText("PKRs");
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        jLabel3.setText("(Optional)");
+
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jLabel4.setText("Donate To");
+
+        organization.setBackground(new java.awt.Color(255, 255, 255));
+        donationOption.add(organization);
+        organization.setSelected(true);
+        organization.setText("Organization");
+        organization.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                organizationActionPerformed(evt);
+            }
+        });
+
+        project.setBackground(new java.awt.Color(255, 255, 255));
+        donationOption.add(project);
+        project.setText("Project");
+        project.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                projectActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jLabel5.setText("Choose a Project");
+
+        jLabel6.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        jLabel6.setText("PKRs");
+
+        ProjectGrid.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        ProjectGrid.setSelectionBackground(new java.awt.Color(255, 83, 61));
+        ProjectGrid.setSelectionForeground(new java.awt.Color(15, 22, 38));
+        ProjectGrid.setShowVerticalLines(false);
+        List<Project> record = Login.admin.getAllProjects();
+        String [][] data = new String [record.size()][2];
+
+        int i = 0;
+        for(Project p: record )
+        {
+            data[i][0] = String.valueOf(p.getId());
+            data[i][1] = p.getName();
+            i++;
+        }
+
+        ProjectGrid.setModel(new javax.swing.table.DefaultTableModel(
+            data,
+            new String [] {
+                "PROJECT ID", "PROJECT NAME"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(ProjectGrid);
+
+        confirmDonation.setBackground(new java.awt.Color(15, 22, 38));
+        confirmDonation.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        confirmDonation.setForeground(new java.awt.Color(200, 200, 200));
+        confirmDonation.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        confirmDonation.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/charity.png"))); // NOI18N
+        confirmDonation.setText("Confirm Donation");
+        confirmDonation.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(102, 102, 102)));
+        confirmDonation.setOpaque(true);
+        confirmDonation.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                confirmDonationMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                confirmDonationMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                confirmDonationMouseExited(evt);
+            }
+        });
+
+        message.setFont(new java.awt.Font("Century Gothic", 3, 14)); // NOI18N
+        message.setForeground(new java.awt.Color(255, 0, 0));
+        message.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -247,15 +368,37 @@ public class AddDonation extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addComponent(back))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addComponent(jLabel2)
-                        .addGap(31, 31, 31)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel3)))
-                .addContainerGap(136, Short.MAX_VALUE))
+                        .addComponent(back)
+                        .addContainerGap(545, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(37, 37, 37)
+                                        .addComponent(worthLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel6))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(58, 58, 58)
+                                        .addComponent(organization)
+                                        .addGap(38, 38, 38)
+                                        .addComponent(project, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel3))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(68, 68, 68))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(confirmDonation, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(202, 202, 202))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(message, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(127, 127, 127))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -263,11 +406,27 @@ public class AddDonation extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(back)
-                .addGap(172, 172, 172)
+                .addGap(34, 34, 34)
+                .addComponent(message, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(worthLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6))
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(organization)
+                    .addComponent(project))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
                     .addComponent(jLabel3))
+                .addGap(29, 29, 29)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
+                .addComponent(confirmDonation, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -355,10 +514,112 @@ public class AddDonation extends javax.swing.JFrame {
         HomeBar.repaint();
     }//GEN-LAST:event_HomeMouseExited
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void worthLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_worthLabelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_worthLabelActionPerformed
 
+    private void HomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeMouseClicked
+        // TODO add your handling code here:
+        Dashboard d = new Dashboard();
+        d.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_HomeMouseClicked
+
+    private void manageOrganizationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_manageOrganizationMouseClicked
+
+    private void manageProjectsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageProjectsMouseClicked
+        // TODO add your handling code here:
+        ManageProjects mp = new ManageProjects();
+        mp.setVisible(true);        
+        this.dispose();
+    }//GEN-LAST:event_manageProjectsMouseClicked
+
+    private void manageDonationsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageDonationsMouseClicked
+        // TODO add your handling code here:
+        ManageDonations md = new ManageDonations();
+        md.setVisible(true);        
+        this.dispose();
+    }//GEN-LAST:event_manageDonationsMouseClicked
+
+    private void manageDonorsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageDonorsMouseClicked
+        // TODO add your handling code here:
+        ManageDonors md = new ManageDonors();
+        md.setVisible(true);        
+        this.dispose();
+    }//GEN-LAST:event_manageDonorsMouseClicked
+
+    private void organizationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_organizationActionPerformed
+        // TODO add your handling code here:
+        donate2Project = false;
+    }//GEN-LAST:event_organizationActionPerformed
+
+    private void confirmDonationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmDonationMouseClicked
+        // TODO add your handling code here:
+        Donor donor = Login.org.getDonor(donorID);
+        if(!worthLabel.getText().isEmpty())
+        {
+            if(donate2Project)
+            {
+                
+                try
+                {
+                    Integer row = ProjectGrid.getSelectedRow();
+                    String value = ProjectGrid.getModel().getValueAt(row, 0).toString();
+                    Donation donation = Login.admin.createNewDonation();
+                    donation.setValue(Double.valueOf(worthLabel.getText()));
+                    donation.setSourceDonor(donor);
+
+                    Login.admin.addDonationToProject(donation, Integer.valueOf(value));
+                    DonorDetails dd = new DonorDetails(donorID);
+                    dd.setVisible(true);
+                    this.dispose();
+                }
+                catch(Exception e)
+                {
+                    message.setText("No project is specified!");
+                }
+
+            }
+            else
+            {
+                Donation donation = Login.admin.createNewDonation();
+                donation.setValue(Double.valueOf(worthLabel.getText()));
+                donation.setSourceDonor(donor);
+
+                Login.admin.addDonationToOrg(donation, donor);
+                DonorDetails dd = new DonorDetails(donorID);
+                dd.setVisible(true);
+                this.dispose();
+            }
+            
+        }
+        else
+        {
+            message.setText("Some important fields are empty!");
+        }
+        
+    }//GEN-LAST:event_confirmDonationMouseClicked
+
+    private void confirmDonationMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmDonationMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_confirmDonationMouseEntered
+
+    private void confirmDonationMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmDonationMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_confirmDonationMouseExited
+
+    private void projectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_projectActionPerformed
+        // TODO add your handling code here:
+        donate2Project = true;
+    }//GEN-LAST:event_projectActionPerformed
+
+                                                  
+                                         
+                                         
+
+    
     /**
      * @param args the command line arguments
      */
@@ -370,7 +631,7 @@ public class AddDonation extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -400,20 +661,30 @@ public class AddDonation extends javax.swing.JFrame {
     private javax.swing.JLabel ManageDonationBar;
     private javax.swing.JLabel ManageDonorsBar;
     private javax.swing.JLabel ManageProjectBar;
+    private javax.swing.JTable ProjectGrid;
     private javax.swing.JLabel back;
+    private javax.swing.JLabel confirmDonation;
+    private javax.swing.ButtonGroup donationOption;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel manageDonations;
     private javax.swing.JLabel manageDonors;
     private javax.swing.JLabel manageOrganization;
     private javax.swing.JLabel manageOrganizationBar;
     private javax.swing.JLabel manageProjects;
-    private javax.swing.JLabel nameLabel2;
+    private javax.swing.JLabel message;
+    private javax.swing.JLabel nameLabel;
+    private javax.swing.JRadioButton organization;
+    private javax.swing.JRadioButton project;
+    private javax.swing.JTextField worthLabel;
     // End of variables declaration//GEN-END:variables
 }

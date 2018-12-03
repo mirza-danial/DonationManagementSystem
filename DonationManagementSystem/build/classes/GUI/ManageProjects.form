@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -45,12 +45,12 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="39" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" min="-2" pref="607" max="-2" attributes="0"/>
                       <Component id="addProject" min="-2" pref="125" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="607" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                  <EmptySpace pref="32" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -89,7 +89,7 @@
                 <Property name="selectionForeground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="26" green="16" red="f" type="rgb"/>
                 </Property>
-                <Property name="showVerticalLines" type="boolean" value="false" postCode="String [][] data = new String [2/*record.getSize()*/][2];&#xa;&#xa;        //int i = 0;&#xa;        //for(Flight f: record.getData() )&#xa;        //{&#xa;        //    data[i][0] = String.valueOf(f.getFlightNum());&#xa;        //    data[i][1] = f.getAirline();            &#xa;        //    i++;&#xa;        // }&#xa;        data[0][0] = &quot;1&quot;;&#xa;        data[0][1] = &quot;Dam Fund Raising&quot;;&#xa;        data[1][0] = &quot;2&quot;;&#xa;        data[1][1] = &quot;Panah Gah&quot;;&#xa;        &#xa;        ProjectGrid.setModel(new javax.swing.table.DefaultTableModel(&#xa;            data,&#xa;            new String [] {&#xa;                &quot;PROJECT ID&quot;, &quot;PROJECT NAME&quot;&#xa;            }&#xa;        ) {&#xa;            boolean[] canEdit = new boolean [] {&#xa;                false, false&#xa;            };&#xa;&#xa;            public boolean isCellEditable(int rowIndex, int columnIndex) {&#xa;                return canEdit [columnIndex];&#xa;            }&#xa;        });"/>
+                <Property name="showVerticalLines" type="boolean" value="false" postCode="List&lt;Project&gt; record = Login.admin.getAllProjects();&#xa;String [][] data = new String [record.size()][2];&#xa;&#xa;        int i = 0;&#xa;        for(Project p: record )&#xa;        {&#xa;            data[i][0] = String.valueOf(p.getId());&#xa;            data[i][1] = p.getName();            &#xa;            i++;&#xa;         }&#xa;       &#xa;        &#xa;        ProjectGrid.setModel(new javax.swing.table.DefaultTableModel(&#xa;            data,&#xa;            new String [] {&#xa;                &quot;PROJECT ID&quot;, &quot;PROJECT NAME&quot;&#xa;            }&#xa;        ) {&#xa;            boolean[] canEdit = new boolean [] {&#xa;                false, false&#xa;            };&#xa;&#xa;            public boolean isCellEditable(int rowIndex, int columnIndex) {&#xa;                return canEdit [columnIndex];&#xa;            }&#xa;        });"/>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
@@ -127,6 +127,7 @@
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addProjectMouseClicked"/>
             <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addProjectMouseEntered"/>
             <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addProjectMouseExited"/>
           </Events>
@@ -279,6 +280,7 @@
                 <Property name="text" type="java.lang.String" value=" Manage Donors"/>
               </Properties>
               <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="manageDonorsMouseClicked"/>
                 <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="manageDonorsMouseEntered"/>
                 <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="manageDonorsMouseExited"/>
               </Events>
@@ -295,6 +297,7 @@
                 <Property name="text" type="java.lang.String" value="  Manage  Organization"/>
               </Properties>
               <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="manageOrganizationMouseClicked"/>
                 <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="manageOrganizationMouseEntered"/>
                 <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="manageOrganizationMouseExited"/>
               </Events>
@@ -327,6 +330,7 @@
                 <Property name="text" type="java.lang.String" value="  Manage  Donations"/>
               </Properties>
               <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="manageDonationsMouseClicked"/>
                 <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="manageDonationsMouseEntered"/>
                 <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="manageDonationsMouseExited"/>
               </Events>
@@ -375,6 +379,7 @@
                 <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="HomeMouseClicked"/>
                 <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="HomeMouseEntered"/>
                 <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="HomeMouseExited"/>
               </Events>

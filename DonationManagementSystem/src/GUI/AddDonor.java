@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package GUI;
-
+import java.awt.Color;
+import java.util.*;
+import Model.*;
 /**
  *
  * @author Danial
@@ -16,6 +18,7 @@ public class AddDonor extends javax.swing.JFrame {
      */
     public AddDonor() {
         initComponents();
+        nameLabel.setText(Login.admin.getName());
     }
 
     /**
@@ -31,7 +34,7 @@ public class AddDonor extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        nameLabel2 = new javax.swing.JLabel();
+        nameLabel = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         manageDonors = new javax.swing.JLabel();
         manageOrganization = new javax.swing.JLabel();
@@ -47,9 +50,15 @@ public class AddDonor extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        donorNameLabel = new javax.swing.JTextField();
+        donorCityLabel = new javax.swing.JTextField();
+        addDonor = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        donorAddressLabel = new javax.swing.JTextField();
+        donorCountryLabel = new javax.swing.JTextField();
+        message = new javax.swing.JLabel();
+        donorPhoneLabel = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,8 +70,8 @@ public class AddDonor extends javax.swing.JFrame {
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/user.png"))); // NOI18N
 
-        nameLabel2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        nameLabel2.setText("Danial Mirza");
+        nameLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        nameLabel.setText("Danial Mirza");
 
         jLabel9.setFont(new java.awt.Font("Century Gothic", 2, 8)); // NOI18N
         jLabel9.setText("Admin");
@@ -82,8 +91,8 @@ public class AddDonor extends javax.swing.JFrame {
                                 .addGap(21, 21, 21))))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(38, 38, 38)
-                        .addComponent(nameLabel2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(nameLabel)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,7 +100,7 @@ public class AddDonor extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nameLabel2)
+                .addComponent(nameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
                 .addContainerGap(46, Short.MAX_VALUE))
@@ -104,6 +113,9 @@ public class AddDonor extends javax.swing.JFrame {
         manageDonors.setText(" Manage Donors");
         manageDonors.setOpaque(true);
         manageDonors.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                manageDonorsMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 manageDonorsMouseEntered(evt);
             }
@@ -117,6 +129,9 @@ public class AddDonor extends javax.swing.JFrame {
         manageOrganization.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         manageOrganization.setText("  Manage  Organization");
         manageOrganization.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                manageOrganizationMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 manageOrganizationMouseEntered(evt);
             }
@@ -132,6 +147,9 @@ public class AddDonor extends javax.swing.JFrame {
         manageProjects.setText("  Manage  Projects");
         manageProjects.setOpaque(true);
         manageProjects.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                manageProjectsMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 manageProjectsMouseEntered(evt);
             }
@@ -146,6 +164,9 @@ public class AddDonor extends javax.swing.JFrame {
         manageDonations.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         manageDonations.setText("  Manage  Donations");
         manageDonations.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                manageDonationsMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 manageDonationsMouseEntered(evt);
             }
@@ -169,6 +190,9 @@ public class AddDonor extends javax.swing.JFrame {
         Home.setText("  Home");
         Home.setOpaque(true);
         Home.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                HomeMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 HomeMouseEntered(evt);
             }
@@ -194,10 +218,10 @@ public class AddDonor extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(manageDonors, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(manageOrganization, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                    .addComponent(manageOrganization, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(manageProjects, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(manageDonations, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Home, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))
+                    .addComponent(Home, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,34 +251,82 @@ public class AddDonor extends javax.swing.JFrame {
         );
 
         back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/left-arrow (1).png"))); // NOI18N
+        back.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backMouseClicked(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jLabel1.setText("Address");
+        jLabel1.setText("Phone Number*");
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jLabel2.setText("Donor Name");
+        jLabel2.setText("Donor Name*");
 
         jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jLabel3.setText("Phone Number");
+        jLabel3.setText("Address*");
 
-        jTextField1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        donorNameLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        donorNameLabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                donorNameLabelActionPerformed(evt);
             }
         });
 
-        jTextField2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        donorCityLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        donorCityLabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                donorCityLabelActionPerformed(evt);
             }
         });
 
-        jTextField3.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        addDonor.setBackground(new java.awt.Color(15, 22, 38));
+        addDonor.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        addDonor.setForeground(new java.awt.Color(200, 200, 200));
+        addDonor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        addDonor.setText("Add Donor");
+        addDonor.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(102, 102, 102)));
+        addDonor.setOpaque(true);
+        addDonor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addDonorMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                addDonorMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                addDonorMouseExited(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jLabel4.setText("City*");
+
+        jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jLabel5.setText("Country*");
+
+        donorAddressLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        donorAddressLabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                donorAddressLabelActionPerformed(evt);
+            }
+        });
+
+        donorCountryLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        donorCountryLabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                donorCountryLabelActionPerformed(evt);
+            }
+        });
+
+        message.setFont(new java.awt.Font("Century Gothic", 3, 14)); // NOI18N
+        message.setForeground(new java.awt.Color(255, 0, 0));
+        message.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        donorPhoneLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        donorPhoneLabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                donorPhoneLabelActionPerformed(evt);
             }
         });
 
@@ -265,27 +337,34 @@ public class AddDonor extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(back)
-                        .addContainerGap(550, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(81, 81, 81)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(donorNameLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(donorCityLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(donorAddressLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(donorCountryLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(donorPhoneLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(127, 127, 127))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(85, 85, 85)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addGap(43, 43, 43)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(171, 171, 171))))
+                                .addGap(28, 28, 28)
+                                .addComponent(back))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(112, 112, 112)
+                                .addComponent(message, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(204, 204, 204)
+                                .addComponent(addDonor, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -293,18 +372,31 @@ public class AddDonor extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(back)
-                .addGap(136, 136, 136)
+                .addGap(71, 71, 71)
+                .addComponent(message, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(donorNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(donorAddressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(donorCityLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                    .addComponent(donorCountryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(donorPhoneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(114, 114, 114)
+                .addComponent(addDonor, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -322,6 +414,13 @@ public class AddDonor extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void manageDonorsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageDonorsMouseClicked
+        // TODO add your handling code here:
+        ManageDonors md = new ManageDonors();
+        md.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_manageDonorsMouseClicked
+
     private void manageDonorsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageDonorsMouseEntered
         // TODO add your handling code h
         manageDonors.setForeground(Dashboard.coral);
@@ -335,6 +434,10 @@ public class AddDonor extends javax.swing.JFrame {
         ManageDonorsBar.setOpaque(false);
         ManageDonorsBar.repaint();
     }//GEN-LAST:event_manageDonorsMouseExited
+
+    private void manageOrganizationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_manageOrganizationMouseClicked
 
     private void manageOrganizationMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseEntered
         // TODO add your handling code here:
@@ -352,6 +455,14 @@ public class AddDonor extends javax.swing.JFrame {
         manageOrganization.setForeground(dullGray);
     }//GEN-LAST:event_manageOrganizationMouseExited
 
+    private void manageProjectsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageProjectsMouseClicked
+        // TODO add your handling code here:
+        ManageProjects mp = new ManageProjects();
+        mp.setVisible(true);
+
+        this.dispose();
+    }//GEN-LAST:event_manageProjectsMouseClicked
+
     private void manageProjectsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageProjectsMouseEntered
         // TODO add your handling code here:
         manageProjects.setForeground(Dashboard.coral);
@@ -366,6 +477,13 @@ public class AddDonor extends javax.swing.JFrame {
         ManageProjectBar.repaint();
     }//GEN-LAST:event_manageProjectsMouseExited
 
+    private void manageDonationsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageDonationsMouseClicked
+        // TODO add your handling code here:
+        ManageDonations md = new ManageDonations();
+        md.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_manageDonationsMouseClicked
+
     private void manageDonationsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageDonationsMouseEntered
         manageDonations.setForeground(Dashboard.coral);
         ManageDonationBar.setOpaque(true);
@@ -377,6 +495,14 @@ public class AddDonor extends javax.swing.JFrame {
         ManageDonationBar.setOpaque(false);
         ManageDonationBar.repaint();
     }//GEN-LAST:event_manageDonationsMouseExited
+
+    private void HomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeMouseClicked
+        // TODO add your handling code here:
+        Dashboard md = new Dashboard();
+        md.setVisible(true);
+
+        this.dispose();
+    }//GEN-LAST:event_HomeMouseClicked
 
     private void HomeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeMouseEntered
         // TODO add your handling code here:
@@ -392,17 +518,75 @@ public class AddDonor extends javax.swing.JFrame {
         HomeBar.repaint();
     }//GEN-LAST:event_HomeMouseExited
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+        manageDonorsMouseClicked(null);
+    }//GEN-LAST:event_backMouseClicked
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void donorNameLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_donorNameLabelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_donorNameLabelActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void donorCityLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_donorCityLabelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_donorCityLabelActionPerformed
+
+    private void addDonorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addDonorMouseClicked
+        // TODO add your handling code here:
+        String name = donorNameLabel.getText();
+        String phone = donorPhoneLabel.getText();
+        String location = donorAddressLabel.getText();
+        String city = donorCityLabel.getText();
+        String country = donorCountryLabel.getText();
+
+        if(!name.isEmpty() && !phone.isEmpty() && !location.isEmpty() && !city.isEmpty() && !country.isEmpty() )
+        {
+            Project p = Login.admin.createNewProject();
+
+            
+            Donor d = Login.admin.createNewDonor();
+            d.setName(name);
+            d.setAddr(location,city,country);
+            d.addPhoneNum(phone);
+            
+            System.out.println("Donor added successfully");
+            message.setForeground(Color.green);
+            message.setText("Donor added!");
+
+            backMouseClicked(null);
+        }
+        else{
+            message.setText("Some required fields are empty");
+        }
+    }//GEN-LAST:event_addDonorMouseClicked
+
+    private void addDonorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addDonorMouseEntered
+        // TODO add your handling code here:
+        addDonor.setBackground(Dashboard.buttonHighlight);
+        addDonor.setForeground(Dashboard.coral);
+    }//GEN-LAST:event_addDonorMouseEntered
+
+    private void addDonorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addDonorMouseExited
+        // TODO add your handling code here:
+        addDonor.setBackground(Dashboard.navyBlue);
+        addDonor.setForeground(Dashboard.primaryTextColor);
+    }//GEN-LAST:event_addDonorMouseExited
+
+    private void donorAddressLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_donorAddressLabelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_donorAddressLabelActionPerformed
+
+    private void donorCountryLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_donorCountryLabelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_donorCountryLabelActionPerformed
+
+    private void donorPhoneLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_donorPhoneLabelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_donorPhoneLabelActionPerformed
+
+                                                 
+                                        
+
 
     /**
      * @param args the command line arguments
@@ -415,7 +599,7 @@ public class AddDonor extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -445,23 +629,29 @@ public class AddDonor extends javax.swing.JFrame {
     private javax.swing.JLabel ManageDonationBar;
     private javax.swing.JLabel ManageDonorsBar;
     private javax.swing.JLabel ManageProjectBar;
+    private javax.swing.JLabel addDonor;
     private javax.swing.JLabel back;
+    private javax.swing.JTextField donorAddressLabel;
+    private javax.swing.JTextField donorCityLabel;
+    private javax.swing.JTextField donorCountryLabel;
+    private javax.swing.JTextField donorNameLabel;
+    private javax.swing.JTextField donorPhoneLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JLabel manageDonations;
     private javax.swing.JLabel manageDonors;
     private javax.swing.JLabel manageOrganization;
     private javax.swing.JLabel manageOrganizationBar;
     private javax.swing.JLabel manageProjects;
-    private javax.swing.JLabel nameLabel2;
+    private javax.swing.JLabel message;
+    private javax.swing.JLabel nameLabel;
     // End of variables declaration//GEN-END:variables
 }
