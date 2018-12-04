@@ -118,6 +118,7 @@ public class Organization {
         }
         return null;
     }
+
     public Donor getDonor(int id){
         return (Donor)getEntity(allDonors, id);
     }
@@ -169,4 +170,26 @@ public class Organization {
         }
         return sum;
     }
+    
+    public Donation getDonation(int id)
+    {
+        for(Donation d: allDonations)
+        {
+            if(d.getId() == id)
+            {
+                return d;
+            }
+        }
+        return null;
+    }
+    public void setTitle(String name)
+    {
+        this.title = title;
+    }
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+            
+            
 }

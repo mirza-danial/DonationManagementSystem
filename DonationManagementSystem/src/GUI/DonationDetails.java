@@ -6,6 +6,7 @@
 package GUI;
 import Model.*;
 import java.awt.Color;
+import java.util.*;
 /**
  *
  * @author Danial
@@ -16,13 +17,22 @@ public class DonationDetails extends javax.swing.JFrame {
      * Creates new form DonationDetails
      */
     private int donationID;
-    
+    private boolean notAssigned;
     public DonationDetails(int ID)
     {
         this();
         donationID = ID;
         
-        //Donation d = Login.admin.getAllDonations();
+        Donation d = Login.org.getDonation(ID);
+        worthLabel.setText(String.valueOf(d.getValue()));
+        donorLabel.setText(d.getSourceDonor().getName());
+        assignedLabel.setText((d.getAssociatedProject()!=null)?d.getAssociatedProject().getName():"Organization");
+        notAssigned = (d.getAssociatedProject()!= null) ? false : true;
+        Table.setVisible(notAssigned);
+        Table.revalidate();
+        Table.repaint();
+        
+        
     }
     
     public DonationDetails() {
@@ -64,10 +74,14 @@ public class DonationDetails extends javax.swing.JFrame {
         worthLabel = new javax.swing.JLabel();
         donorLabel = new javax.swing.JLabel();
         assignedLabel = new javax.swing.JLabel();
+        Table = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ProjectGrid = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel6.setBackground(new java.awt.Color(15, 22, 38));
 
@@ -252,8 +266,10 @@ public class DonationDetails extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ManageDonorsBar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(manageDonors, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(244, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 679));
 
         back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/left-arrow (1).png"))); // NOI18N
         back.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -261,16 +277,20 @@ public class DonationDetails extends javax.swing.JFrame {
                 backMouseClicked(evt);
             }
         });
+        jPanel1.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 19, -1, -1));
 
         message.setFont(new java.awt.Font("Century Gothic", 3, 14)); // NOI18N
         message.setForeground(new java.awt.Color(255, 0, 0));
         message.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(message, new org.netbeans.lib.awtextra.AbsoluteConstraints(381, 150, 330, 23));
 
         projectNameLabel.setFont(new java.awt.Font("Century Gothic", 3, 24)); // NOI18N
         projectNameLabel.setText("Donation Details");
+        jPanel1.add(projectNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(208, 90, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel10.setText("Assigned:");
+        jLabel10.setText("Assigned To:");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(208, 230, -1, -1));
 
         assignDonation.setBackground(new java.awt.Color(15, 22, 38));
         assignDonation.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -291,80 +311,84 @@ public class DonationDetails extends javax.swing.JFrame {
                 assignDonationMouseExited(evt);
             }
         });
+        jPanel1.add(assignDonation, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 625, 150, 54));
 
         jLabel11.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel11.setText("Value:");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(208, 150, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel12.setText("Donor:");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(208, 189, -1, -1));
 
         worthLabel.setFont(new java.awt.Font("Century Gothic", 3, 14)); // NOI18N
         worthLabel.setText("1000$");
+        jPanel1.add(worthLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(335, 154, -1, -1));
 
         donorLabel.setFont(new java.awt.Font("Century Gothic", 3, 14)); // NOI18N
         donorLabel.setText("Ejaz Sahab");
+        jPanel1.add(donorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(335, 193, -1, -1));
 
         assignedLabel.setFont(new java.awt.Font("Century Gothic", 3, 14)); // NOI18N
         assignedLabel.setText("Yes");
+        jPanel1.add(assignedLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(335, 234, -1, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(back))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11)
-                            .addComponent(projectNameLabel)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel12)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(181, 181, 181)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(worthLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(message, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(assignDonation, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(donorLabel)
-                            .addComponent(assignedLabel))))
-                .addContainerGap(53, Short.MAX_VALUE))
+        Table.setOpaque(false);
+
+        ProjectGrid.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        ProjectGrid.setSelectionBackground(new java.awt.Color(255, 83, 61));
+        ProjectGrid.setSelectionForeground(new java.awt.Color(15, 22, 38));
+        ProjectGrid.setShowVerticalLines(false);
+        List<Project> record = Login.admin.getAllProjects();
+        String [][] data = new String [record.size()][2];
+
+        int i = 0;
+        for(Project p: record )
+        {
+            data[i][0] = String.valueOf(p.getId());
+            data[i][1] = p.getName();
+            i++;
+        }
+
+        ProjectGrid.setModel(new javax.swing.table.DefaultTableModel(
+            data,
+            new String [] {
+                "PROJECT ID", "PROJECT NAME"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        ProjectGrid.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ProjectGridMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(ProjectGrid);
+
+        javax.swing.GroupLayout TableLayout = new javax.swing.GroupLayout(Table);
+        Table.setLayout(TableLayout);
+        TableLayout.setHorizontalGroup(
+            TableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TableLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(64, 64, 64))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(back)
-                .addGap(39, 39, 39)
-                .addComponent(projectNameLabel)
-                .addGap(29, 29, 29)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(message, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel11)
-                        .addComponent(worthLabel)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel12)
-                            .addComponent(donorLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(assignedLabel)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(300, 300, 300)
-                        .addComponent(assignDonation, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        TableLayout.setVerticalGroup(
+            TableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TableLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(61, 61, 61))
         );
+
+        jPanel1.add(Table, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 283, 479, 287));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -374,7 +398,7 @@ public class DonationDetails extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -486,25 +510,55 @@ public class DonationDetails extends javax.swing.JFrame {
 
     private void backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseClicked
         // TODO add your handling code here:
-        manageProjectsMouseClicked(null);
+        manageDonationsMouseClicked(null);
     }//GEN-LAST:event_backMouseClicked
 
     private void assignDonationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_assignDonationMouseClicked
         // TODO add your handling code here:
+        if(notAssigned)
+        {
+            try
+                {
+                    Integer row = ProjectGrid.getSelectedRow();
+                    String value = ProjectGrid.getModel().getValueAt(row, 0).toString();
+                    
+                    Project p = Login.org.getProject(Integer.valueOf(value));
+                    
+                    Donation donation = Login.org.getDonation(donationID);
+                    
+                    donation.assignToProject(p);
 
+                    assignedLabel.setText((donation.getAssociatedProject()!=null)?donation.getAssociatedProject().getName():"Organization");
+                   
+                }
+                catch(Exception e)
+                {
+                    message.setText("No project is specified!");
+                }
+        }
     }//GEN-LAST:event_assignDonationMouseClicked
 
     private void assignDonationMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_assignDonationMouseEntered
         // TODO add your handling code here:
-        assignDonation.setBackground(Dashboard.buttonHighlight);
-        assignDonation.setForeground(Dashboard.coral);
+        if(notAssigned)
+        {
+            assignDonation.setBackground(Dashboard.buttonHighlight);
+            assignDonation.setForeground(Dashboard.coral);
+        }
     }//GEN-LAST:event_assignDonationMouseEntered
 
     private void assignDonationMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_assignDonationMouseExited
         // TODO add your handling code here:
-        assignDonation.setBackground(Dashboard.navyBlue);
-        assignDonation.setForeground(Dashboard.primaryTextColor);
+        if(notAssigned)
+        {
+            assignDonation.setBackground(Dashboard.navyBlue);
+            assignDonation.setForeground(Dashboard.primaryTextColor);
+        }
     }//GEN-LAST:event_assignDonationMouseExited
+
+    private void ProjectGridMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProjectGridMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ProjectGridMouseClicked
 
     /**
      * @param args the command line arguments
@@ -547,6 +601,8 @@ public class DonationDetails extends javax.swing.JFrame {
     private javax.swing.JLabel ManageDonationBar;
     private javax.swing.JLabel ManageDonorsBar;
     private javax.swing.JLabel ManageProjectBar;
+    private javax.swing.JTable ProjectGrid;
+    private javax.swing.JPanel Table;
     private javax.swing.JLabel assignDonation;
     private javax.swing.JLabel assignedLabel;
     private javax.swing.JLabel back;
@@ -559,6 +615,7 @@ public class DonationDetails extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel manageDonations;
     private javax.swing.JLabel manageDonors;
     private javax.swing.JLabel manageOrganization;

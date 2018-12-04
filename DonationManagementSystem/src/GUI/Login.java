@@ -5,7 +5,7 @@
  */
 package GUI;
 
-import Model.Address;
+import Model.*;
 import Model.Admin;
 import Model.Organization;
 import Model.Project;
@@ -38,6 +38,11 @@ public class Login extends javax.swing.JFrame {
         a.setPassword("123");
         
        
+        Donor d = a.createNewDonor();
+        d.setName("Danial");
+        d.setAddr("Model Town", "Lahore", "Pakistan");
+        d.addPhoneNum("090078601");
+        
         
         Project p = a.createNewProject();
         p.setName("TCF Schools");
@@ -64,14 +69,15 @@ public class Login extends javax.swing.JFrame {
         passwordField = new javax.swing.JPasswordField();
         Login = new javax.swing.JLabel();
         message = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         Background = new javax.swing.JLabel();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(760, 720));
+        setPreferredSize(new java.awt.Dimension(760, 600));
         setResizable(false);
-        setSize(new java.awt.Dimension(760, 720));
+        setSize(new java.awt.Dimension(760, 600));
         getContentPane().setLayout(null);
 
         userNameField.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -129,10 +135,30 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(message);
         message.setBounds(200, 150, 330, 14);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
         Background.setForeground(new java.awt.Color(255, 0, 0));
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Background.jpg"))); // NOI18N
-        getContentPane().add(Background);
-        Background.setBounds(0, 0, 770, 530);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addComponent(Background, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(29, Short.MAX_VALUE)
+                .addComponent(Background, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
+        );
+
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, 0, 790, 570);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -231,6 +257,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel message;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JTextField userNameField;

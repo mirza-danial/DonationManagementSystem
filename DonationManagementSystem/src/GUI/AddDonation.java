@@ -567,9 +567,13 @@ public class AddDonation extends javax.swing.JFrame {
                 {
                     Integer row = ProjectGrid.getSelectedRow();
                     String value = ProjectGrid.getModel().getValueAt(row, 0).toString();
+                    
+                    Project p = Login.org.getProject(Integer.valueOf(value));
+                    
                     Donation donation = Login.admin.createNewDonation();
                     donation.setValue(Double.valueOf(worthLabel.getText()));
                     donation.setSourceDonor(donor);
+                    donation.assignToProject(p);
 
                     Login.admin.addDonationToProject(donation, Integer.valueOf(value));
                     DonorDetails dd = new DonorDetails(donorID);
