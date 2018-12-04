@@ -27,7 +27,7 @@ public class Dashboard extends javax.swing.JFrame {
         nameLabel.setText(Login.admin.getName());
         welcomeNameLabel.setText(Login.admin.getName());
         totalProjectsLabel.setText(String.valueOf(Login.admin.getAllProjects().size())); //number of projects
-        //totalReceivedFundsLabel.setText(); // get value
+        totalReceivedFundsLabel.setText(String.valueOf(Login.admin.getTotalFunds())); // get value
         totalDonorsLabel.setText(String.valueOf(Login.admin.getAllDonors().size()));
     }
 
@@ -494,6 +494,9 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void manageOrganizationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseClicked
         // TODO add your handling code here:
+        ManageOrganization mo = new ManageOrganization();
+        mo.setVisible(true);
+        this.dispose();
         
     }//GEN-LAST:event_manageOrganizationMouseClicked
 

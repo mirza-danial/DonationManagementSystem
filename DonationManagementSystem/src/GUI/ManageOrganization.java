@@ -16,6 +16,9 @@ public class ManageOrganization extends javax.swing.JFrame {
      */
     public ManageOrganization() {
         initComponents();
+        nameLabel.setText(Login.admin.getName());
+        TitleLabel.setText(Login.org.title);
+        descriptionLabel.setText(Login.org.description);
     }
 
     /**
@@ -52,6 +55,7 @@ public class ManageOrganization extends javax.swing.JFrame {
         addressLabel = new javax.swing.JLabel();
         phoneLabel = new javax.swing.JLabel();
         updateOrganization = new javax.swing.JLabel();
+        adminManage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -279,6 +283,25 @@ public class ManageOrganization extends javax.swing.JFrame {
             }
         });
 
+        adminManage.setBackground(new java.awt.Color(15, 22, 38));
+        adminManage.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        adminManage.setForeground(new java.awt.Color(200, 200, 200));
+        adminManage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        adminManage.setText("Add/Remove Admin");
+        adminManage.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(102, 102, 102)));
+        adminManage.setOpaque(true);
+        adminManage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                adminManageMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                adminManageMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                adminManageMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -300,12 +323,12 @@ public class ManageOrganization extends javax.swing.JFrame {
                                     .addComponent(jLabel3))
                                 .addGap(50, 50, 50)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(addressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(phoneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(170, 170, 170)
-                        .addComponent(updateOrganization, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(phoneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(adminManage, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(addressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(updateOrganization, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -328,8 +351,10 @@ public class ManageOrganization extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(addressLabel))
-                .addGap(122, 122, 122)
-                .addComponent(updateOrganization, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(134, 134, 134)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(updateOrganization, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(adminManage, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -452,6 +477,26 @@ public class ManageOrganization extends javax.swing.JFrame {
         updateOrganization.setForeground(Dashboard.primaryTextColor);
     }//GEN-LAST:event_updateOrganizationMouseExited
 
+    private void adminManageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adminManageMouseClicked
+        // TODO add your handling code here:
+        ManageAdmin ma = new ManageAdmin();
+        ma.setVisible(true);
+        this.dispose();
+                
+    }//GEN-LAST:event_adminManageMouseClicked
+
+    private void adminManageMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adminManageMouseEntered
+        // TODO add your handling code here:
+        adminManage.setBackground(Dashboard.buttonHighlight);
+        adminManage.setForeground(Dashboard.coral);
+    }//GEN-LAST:event_adminManageMouseEntered
+
+    private void adminManageMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adminManageMouseExited
+        // TODO add your handling code here:
+        adminManage.setBackground(Dashboard.navyBlue);
+        adminManage.setForeground(Dashboard.primaryTextColor);
+    }//GEN-LAST:event_adminManageMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -495,6 +540,7 @@ public class ManageOrganization extends javax.swing.JFrame {
     private javax.swing.JLabel ManageProjectBar;
     private javax.swing.JLabel TitleLabel;
     private javax.swing.JLabel addressLabel;
+    private javax.swing.JLabel adminManage;
     private javax.swing.JLabel descriptionLabel;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -512,8 +558,6 @@ public class ManageOrganization extends javax.swing.JFrame {
     private javax.swing.JLabel message;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel phoneLabel;
-    private javax.swing.JLabel updateDonor;
-    private javax.swing.JLabel updateDonor1;
     private javax.swing.JLabel updateOrganization;
     // End of variables declaration//GEN-END:variables
 }

@@ -262,6 +262,11 @@ public class AddDonation extends javax.swing.JFrame {
         );
 
         back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/left-arrow (1).png"))); // NOI18N
+        back.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backMouseClicked(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel2.setText("Ammount");
@@ -527,6 +532,9 @@ public class AddDonation extends javax.swing.JFrame {
 
     private void manageOrganizationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseClicked
         // TODO add your handling code here:
+        ManageOrganization mo = new ManageOrganization();
+        mo.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_manageOrganizationMouseClicked
 
     private void manageProjectsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageProjectsMouseClicked
@@ -618,6 +626,13 @@ public class AddDonation extends javax.swing.JFrame {
         // TODO add your handling code here:
         donate2Project = true;
     }//GEN-LAST:event_projectActionPerformed
+
+    private void backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseClicked
+        // TODO add your handling code here:
+        ManageDonations md = new ManageDonations();
+        md.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_backMouseClicked
 
                                                   
                                          

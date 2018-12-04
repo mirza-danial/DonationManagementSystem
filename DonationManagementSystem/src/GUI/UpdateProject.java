@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package GUI;
-
+import Model.*;
+import java.awt.Color;
 /**
  *
  * @author Danial
@@ -14,8 +15,22 @@ public class UpdateProject extends javax.swing.JFrame {
     /**
      * Creates new form UpdateProject
      */
+    private int projectID;
+    public UpdateProject(int ID)
+    {
+        this();
+        projectID = ID;
+        Project p = Login.org.getProject(ID);
+        projectnameLabel.setText(p.getName());
+        projectLocationLabel.setText(p.getAddr().getAddrLine());
+        projectCityLabel.setText(p.getAddr().getCity());
+        projectCountryLabel.setText(p.getAddr().getCountry());
+        projectDescriptionArea.setText(p.getDescritpion());
+    }
+    
     public UpdateProject() {
         initComponents();
+        nameLabel.setText(Login.admin.getName());
     }
 
     /**
@@ -27,21 +42,556 @@ public class UpdateProject extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        nameLabel = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        manageDonors = new javax.swing.JLabel();
+        manageOrganization = new javax.swing.JLabel();
+        manageProjects = new javax.swing.JLabel();
+        manageDonations = new javax.swing.JLabel();
+        manageOrganizationBar = new javax.swing.JLabel();
+        ManageProjectBar = new javax.swing.JLabel();
+        ManageDonationBar = new javax.swing.JLabel();
+        ManageDonorsBar = new javax.swing.JLabel();
+        Home = new javax.swing.JLabel();
+        HomeBar = new javax.swing.JLabel();
+        back = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        projectnameLabel = new javax.swing.JTextField();
+        projectCityLabel = new javax.swing.JTextField();
+        updateProject = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        projectDescriptionArea = new javax.swing.JTextArea();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        projectLocationLabel = new javax.swing.JTextField();
+        projectCountryLabel = new javax.swing.JTextField();
+        message = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel6.setBackground(new java.awt.Color(15, 22, 38));
+
+        jPanel7.setBackground(new java.awt.Color(255, 83, 61));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/user.png"))); // NOI18N
+
+        nameLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        nameLabel.setText("Danial Mirza");
+
+        jLabel9.setFont(new java.awt.Font("Century Gothic", 2, 8)); // NOI18N
+        jLabel9.setText("Admin");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel9)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(21, 21, 21))))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(nameLabel)))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nameLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9)
+                .addContainerGap(46, Short.MAX_VALUE))
+        );
+
+        manageDonors.setBackground(new java.awt.Color(15, 22, 38));
+        manageDonors.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        manageDonors.setForeground(new java.awt.Color(200, 200, 200));
+        manageDonors.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        manageDonors.setText(" Manage Donors");
+        manageDonors.setOpaque(true);
+        manageDonors.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                manageDonorsMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                manageDonorsMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                manageDonorsMouseExited(evt);
+            }
+        });
+
+        manageOrganization.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        manageOrganization.setForeground(new java.awt.Color(200, 200, 200));
+        manageOrganization.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        manageOrganization.setText("  Manage  Organization");
+        manageOrganization.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                manageOrganizationMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                manageOrganizationMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                manageOrganizationMouseExited(evt);
+            }
+        });
+
+        manageProjects.setBackground(new java.awt.Color(15, 22, 38));
+        manageProjects.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        manageProjects.setForeground(new java.awt.Color(200, 200, 200));
+        manageProjects.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        manageProjects.setText("  Manage  Projects");
+        manageProjects.setOpaque(true);
+        manageProjects.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                manageProjectsMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                manageProjectsMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                manageProjectsMouseExited(evt);
+            }
+        });
+
+        manageDonations.setBackground(new java.awt.Color(255, 83, 61));
+        manageDonations.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        manageDonations.setForeground(new java.awt.Color(200, 200, 200));
+        manageDonations.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        manageDonations.setText("  Manage  Donations");
+        manageDonations.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                manageDonationsMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                manageDonationsMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                manageDonationsMouseExited(evt);
+            }
+        });
+
+        manageOrganizationBar.setBackground(new java.awt.Color(255, 83, 62));
+
+        ManageProjectBar.setBackground(new java.awt.Color(255, 83, 62));
+
+        ManageDonationBar.setBackground(new java.awt.Color(255, 83, 62));
+
+        ManageDonorsBar.setBackground(new java.awt.Color(255, 83, 62));
+
+        Home.setBackground(new java.awt.Color(15, 22, 38));
+        Home.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        Home.setForeground(new java.awt.Color(200, 200, 200));
+        Home.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        Home.setText("  Home");
+        Home.setOpaque(true);
+        Home.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                HomeMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                HomeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                HomeMouseExited(evt);
+            }
+        });
+
+        HomeBar.setBackground(new java.awt.Color(255, 83, 62));
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(manageOrganizationBar, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ManageDonationBar, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ManageDonorsBar, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ManageProjectBar, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(HomeBar, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(manageDonors, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(manageOrganization, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(manageProjects, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(manageDonations, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Home, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(80, 80, 80)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(HomeBar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Home, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(manageOrganization, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(manageOrganizationBar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(manageProjects, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ManageProjectBar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(manageDonations, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ManageDonationBar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ManageDonorsBar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(manageDonors, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(233, Short.MAX_VALUE))
+        );
+
+        back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/left-arrow (1).png"))); // NOI18N
+        back.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backMouseClicked(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jLabel1.setText("Project Description");
+
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jLabel2.setText("Project Name");
+
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jLabel3.setText("Location");
+
+        projectnameLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        projectnameLabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                projectnameLabelActionPerformed(evt);
+            }
+        });
+
+        projectCityLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        projectCityLabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                projectCityLabelActionPerformed(evt);
+            }
+        });
+
+        updateProject.setBackground(new java.awt.Color(15, 22, 38));
+        updateProject.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        updateProject.setForeground(new java.awt.Color(200, 200, 200));
+        updateProject.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        updateProject.setText("Update Project");
+        updateProject.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(102, 102, 102)));
+        updateProject.setOpaque(true);
+        updateProject.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                updateProjectMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                updateProjectMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                updateProjectMouseExited(evt);
+            }
+        });
+
+        projectDescriptionArea.setColumns(20);
+        projectDescriptionArea.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
+        projectDescriptionArea.setRows(5);
+        jScrollPane1.setViewportView(projectDescriptionArea);
+
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jLabel4.setText("City");
+
+        jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jLabel5.setText("Country");
+
+        projectLocationLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        projectLocationLabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                projectLocationLabelActionPerformed(evt);
+            }
+        });
+
+        projectCountryLabel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        projectCountryLabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                projectCountryLabelActionPerformed(evt);
+            }
+        });
+
+        message.setFont(new java.awt.Font("Century Gothic", 3, 14)); // NOI18N
+        message.setForeground(new java.awt.Color(255, 0, 0));
+        message.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(81, 81, 81)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(projectnameLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(projectCityLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(projectLocationLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(projectCountryLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(127, 127, 127))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addComponent(back))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(224, 224, 224)
+                                .addComponent(updateProject, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(112, 112, 112)
+                                .addComponent(message, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(back)
+                .addGap(71, 71, 71)
+                .addComponent(message, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(projectnameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3))
+                    .addComponent(projectLocationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(projectCityLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(projectCountryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(updateProject, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(91, 91, 91))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void manageDonorsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageDonorsMouseClicked
+        // TODO add your handling code here:
+        ManageDonors md = new ManageDonors();
+        md.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_manageDonorsMouseClicked
+
+    private void manageDonorsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageDonorsMouseEntered
+        // TODO add your handling code h
+        manageDonors.setForeground(Dashboard.coral);
+        ManageDonorsBar.setOpaque(true);
+        ManageDonorsBar.repaint();
+    }//GEN-LAST:event_manageDonorsMouseEntered
+
+    private void manageDonorsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageDonorsMouseExited
+        // TODO add your handling code here:
+        manageDonors.setForeground(Dashboard.primaryTextColor);
+        ManageDonorsBar.setOpaque(false);
+        ManageDonorsBar.repaint();
+    }//GEN-LAST:event_manageDonorsMouseExited
+
+    private void manageOrganizationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseClicked
+        // TODO add your handling code here:
+        ManageOrganization mo = new ManageOrganization();
+        mo.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_manageOrganizationMouseClicked
+
+    private void manageOrganizationMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseEntered
+        // TODO add your handling code here:
+        Color highlight = new Color(255,83,61);
+        manageOrganization.setForeground(highlight);
+        manageOrganizationBar.setOpaque(true);
+        manageOrganizationBar.repaint();
+    }//GEN-LAST:event_manageOrganizationMouseEntered
+
+    private void manageOrganizationMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseExited
+        // TODO add your handling code here:
+        Color dullGray = new Color(200,200,200);
+        manageOrganizationBar.setOpaque(false);
+        manageOrganizationBar.repaint();
+        manageOrganization.setForeground(dullGray);
+    }//GEN-LAST:event_manageOrganizationMouseExited
+
+    private void manageProjectsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageProjectsMouseClicked
+        // TODO add your handling code here:
+        ManageProjects mp = new ManageProjects();
+        mp.setVisible(true);
+
+        this.dispose();
+    }//GEN-LAST:event_manageProjectsMouseClicked
+
+    private void manageProjectsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageProjectsMouseEntered
+        // TODO add your handling code here:
+        manageProjects.setForeground(Dashboard.coral);
+        ManageProjectBar.setOpaque(true);
+        ManageProjectBar.repaint();
+    }//GEN-LAST:event_manageProjectsMouseEntered
+
+    private void manageProjectsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageProjectsMouseExited
+        // TODO add your handling code here:
+        manageProjects.setForeground(Dashboard.primaryTextColor);
+        ManageProjectBar.setOpaque(false);
+        ManageProjectBar.repaint();
+    }//GEN-LAST:event_manageProjectsMouseExited
+
+    private void manageDonationsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageDonationsMouseClicked
+        // TODO add your handling code here:
+        ManageDonations md = new ManageDonations();
+        md.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_manageDonationsMouseClicked
+
+    private void manageDonationsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageDonationsMouseEntered
+        manageDonations.setForeground(Dashboard.coral);
+        ManageDonationBar.setOpaque(true);
+        ManageDonationBar.repaint();
+    }//GEN-LAST:event_manageDonationsMouseEntered
+
+    private void manageDonationsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageDonationsMouseExited
+        manageDonations.setForeground(Dashboard.primaryTextColor);
+        ManageDonationBar.setOpaque(false);
+        ManageDonationBar.repaint();
+    }//GEN-LAST:event_manageDonationsMouseExited
+
+    private void HomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeMouseClicked
+        // TODO add your handling code here:
+        Dashboard md = new Dashboard();
+        md.setVisible(true);
+
+        this.dispose();
+    }//GEN-LAST:event_HomeMouseClicked
+
+    private void HomeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeMouseEntered
+        // TODO add your handling code here:
+        Home.setForeground(Dashboard.coral);
+        HomeBar.setOpaque(true);
+        HomeBar.repaint();
+    }//GEN-LAST:event_HomeMouseEntered
+
+    private void HomeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeMouseExited
+        // TODO add your handling code here:
+        Home.setForeground(Dashboard.primaryTextColor);
+        HomeBar.setOpaque(false);
+        HomeBar.repaint();
+    }//GEN-LAST:event_HomeMouseExited
+
+    private void backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseClicked
+        // TODO add your handling code here:
+        manageProjectsMouseClicked(null);
+    }//GEN-LAST:event_backMouseClicked
+
+    private void projectnameLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_projectnameLabelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_projectnameLabelActionPerformed
+
+    private void projectCityLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_projectCityLabelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_projectCityLabelActionPerformed
+
+    private void updateProjectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateProjectMouseClicked
+        // TODO add your handling code here:
+        String name = projectnameLabel.getText();
+        String description = projectDescriptionArea.getText();
+        String location = projectLocationLabel.getText();
+        String city = projectCityLabel.getText();
+        String country = projectCountryLabel.getText();
+
+        if(!name.isEmpty() && !description.isEmpty())
+        {
+            Project p = Login.org.getProject(projectID);
+            
+            p.setAddr(location, city, country);
+            p.setDescritpion(description);
+            p.setName(name);
+            ProjectDetails pd = new ProjectDetails(projectID);
+            pd.setVisible(true);
+            this.dispose();
+        }
+        else{
+            message.setText("Some required fields are empty");
+        }
+
+    }//GEN-LAST:event_updateProjectMouseClicked
+
+    private void updateProjectMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateProjectMouseEntered
+        // TODO add your handling code here:
+        updateProject.setBackground(Dashboard.buttonHighlight);
+        updateProject.setForeground(Dashboard.coral);
+    }//GEN-LAST:event_updateProjectMouseEntered
+
+    private void updateProjectMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateProjectMouseExited
+        // TODO add your handling code here:
+        updateProject.setBackground(Dashboard.navyBlue);
+        updateProject.setForeground(Dashboard.primaryTextColor);
+    }//GEN-LAST:event_updateProjectMouseExited
+
+    private void projectLocationLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_projectLocationLabelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_projectLocationLabelActionPerformed
+
+    private void projectCountryLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_projectCountryLabelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_projectCountryLabelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +629,35 @@ public class UpdateProject extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Home;
+    private javax.swing.JLabel HomeBar;
+    private javax.swing.JLabel ManageDonationBar;
+    private javax.swing.JLabel ManageDonorsBar;
+    private javax.swing.JLabel ManageProjectBar;
+    private javax.swing.JLabel back;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel manageDonations;
+    private javax.swing.JLabel manageDonors;
+    private javax.swing.JLabel manageOrganization;
+    private javax.swing.JLabel manageOrganizationBar;
+    private javax.swing.JLabel manageProjects;
+    private javax.swing.JLabel message;
+    private javax.swing.JLabel nameLabel;
+    private javax.swing.JTextField projectCityLabel;
+    private javax.swing.JTextField projectCountryLabel;
+    private javax.swing.JTextArea projectDescriptionArea;
+    private javax.swing.JTextField projectLocationLabel;
+    private javax.swing.JTextField projectnameLabel;
+    private javax.swing.JLabel updateProject;
     // End of variables declaration//GEN-END:variables
 }

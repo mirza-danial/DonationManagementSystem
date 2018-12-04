@@ -421,6 +421,9 @@ public class ManageProjects extends javax.swing.JFrame {
 
     private void manageOrganizationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseClicked
         // TODO add your handling code here:
+        ManageOrganization mo = new ManageOrganization();
+        mo.setVisible(true);
+        this.dispose();
         
     }//GEN-LAST:event_manageOrganizationMouseClicked
 

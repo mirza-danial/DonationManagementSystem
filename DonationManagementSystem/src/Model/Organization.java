@@ -191,5 +191,8 @@ public class Organization {
         this.description = description;
     }
             
-            
+    public List<Admin> getAllAdmins()
+    {
+        return allAdmins;
+    }
 }

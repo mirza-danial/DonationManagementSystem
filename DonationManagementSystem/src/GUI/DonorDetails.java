@@ -29,6 +29,7 @@ public class DonorDetails extends javax.swing.JFrame {
     
     public DonorDetails() {
         initComponents();
+        nameLabel.setText(Login.admin.getName());
     }
 
     /**
@@ -390,9 +391,9 @@ public class DonorDetails extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(message, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(donorPhoneLabel)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(donorPhoneLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel10))
                 .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -442,6 +443,9 @@ public class DonorDetails extends javax.swing.JFrame {
 
     private void manageOrganizationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseClicked
         // TODO add your handling code here:
+        ManageOrganization mo = new ManageOrganization();
+        mo.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_manageOrganizationMouseClicked
 
     private void manageOrganizationMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseEntered
@@ -530,6 +534,9 @@ public class DonorDetails extends javax.swing.JFrame {
 
     private void updateDonorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateDonorMouseClicked
         // TODO add your handling code here:
+        UpdateDonor ud = new UpdateDonor(donorID);
+        ud.setVisible(true);
+        this.dispose();
 
     }//GEN-LAST:event_updateDonorMouseClicked
 

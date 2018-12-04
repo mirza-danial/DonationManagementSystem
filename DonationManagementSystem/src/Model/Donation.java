@@ -60,6 +60,11 @@ public class Donation {
         p.addDonation(this);
         associatedProject = p;
     }
+    public void removeProject()
+    {        
+        associatedProject.removeDonation(this);
+        associatedProject = null;
+    }
     
     public boolean decrementQuant(){
         if(propertyInfo != null && propertyInfo.quantity > 0){

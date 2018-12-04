@@ -30,6 +30,7 @@ public class ProjectDetails extends javax.swing.JFrame {
     
     public ProjectDetails() {
         initComponents();
+        nameLabel.setText(Login.admin.getName());
     }
 
     /**
@@ -423,7 +424,10 @@ public class ProjectDetails extends javax.swing.JFrame {
     }//GEN-LAST:event_manageDonorsMouseExited
 
     private void manageOrganizationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseClicked
-        // TODO add your handling code here:
+        // TODO add your handling code here
+        ManageOrganization mo = new ManageOrganization();
+        mo.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_manageOrganizationMouseClicked
 
     private void manageOrganizationMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseEntered
@@ -512,6 +516,10 @@ public class ProjectDetails extends javax.swing.JFrame {
 
     private void updateProjectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateProjectMouseClicked
         // TODO add your handling code here:
+        UpdateProject up = new UpdateProject(projectID);
+        up.setVisible(true);
+        
+        this.dispose();
       
     }//GEN-LAST:event_updateProjectMouseClicked
 

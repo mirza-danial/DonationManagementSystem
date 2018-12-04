@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import java.awt.Color;
+
 /**
  *
  * @author Danial
@@ -25,6 +27,8 @@ public class UpdateOrganization extends javax.swing.JFrame {
 
         //organizationPhoneField.setText(Login.org.);
         //organizationAddressField.setText(Login.org.);
+        
+        nameLabel.setText(Login.admin.getName());
     }
 
     /**
@@ -423,6 +427,9 @@ public class UpdateOrganization extends javax.swing.JFrame {
 
     private void manageOrganizationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseClicked
         // TODO add your handling code here:
+        ManageOrganization mo = new ManageOrganization();
+        mo.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_manageOrganizationMouseClicked
 
     private void manageOrganizationMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseEntered
@@ -518,6 +525,8 @@ public class UpdateOrganization extends javax.swing.JFrame {
         */
         //Login.org.setPhoneNumber(organizationPhoneField.getText());
         //Login.org.setAddressNumber(organizationAddressField.getText());
+        
+        backMouseClicked(null);
     }//GEN-LAST:event_updateDetailsMouseClicked
 
     private void updateDetailsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateDetailsMouseEntered

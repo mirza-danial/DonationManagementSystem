@@ -28,15 +28,14 @@ public class DonationDetails extends javax.swing.JFrame {
         donorLabel.setText(d.getSourceDonor().getName());
         assignedLabel.setText((d.getAssociatedProject()!=null)?d.getAssociatedProject().getName():"Organization");
         notAssigned = (d.getAssociatedProject()!= null) ? false : true;
-        Table.setVisible(notAssigned);
-        Table.revalidate();
-        Table.repaint();
+        
         
         
     }
     
     public DonationDetails() {
         initComponents();
+        nameLabel.setText(Login.admin.getName());
     }
 
     /**
@@ -68,15 +67,12 @@ public class DonationDetails extends javax.swing.JFrame {
         message = new javax.swing.JLabel();
         projectNameLabel = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        assignDonation = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         worthLabel = new javax.swing.JLabel();
         donorLabel = new javax.swing.JLabel();
         assignedLabel = new javax.swing.JLabel();
-        Table = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        ProjectGrid = new javax.swing.JTable();
+        assignDonation1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -292,27 +288,6 @@ public class DonationDetails extends javax.swing.JFrame {
         jLabel10.setText("Assigned To:");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(208, 230, -1, -1));
 
-        assignDonation.setBackground(new java.awt.Color(15, 22, 38));
-        assignDonation.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        assignDonation.setForeground(new java.awt.Color(200, 200, 200));
-        assignDonation.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        assignDonation.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/briefing.png"))); // NOI18N
-        assignDonation.setText("Assign Donation");
-        assignDonation.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(102, 102, 102)));
-        assignDonation.setOpaque(true);
-        assignDonation.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                assignDonationMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                assignDonationMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                assignDonationMouseExited(evt);
-            }
-        });
-        jPanel1.add(assignDonation, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 625, 150, 54));
-
         jLabel11.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel11.setText("Value:");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(208, 150, -1, -1));
@@ -333,62 +308,26 @@ public class DonationDetails extends javax.swing.JFrame {
         assignedLabel.setText("Yes");
         jPanel1.add(assignedLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(335, 234, -1, -1));
 
-        Table.setOpaque(false);
-
-        ProjectGrid.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        ProjectGrid.setSelectionBackground(new java.awt.Color(255, 83, 61));
-        ProjectGrid.setSelectionForeground(new java.awt.Color(15, 22, 38));
-        ProjectGrid.setShowVerticalLines(false);
-        List<Project> record = Login.admin.getAllProjects();
-        String [][] data = new String [record.size()][2];
-
-        int i = 0;
-        for(Project p: record )
-        {
-            data[i][0] = String.valueOf(p.getId());
-            data[i][1] = p.getName();
-            i++;
-        }
-
-        ProjectGrid.setModel(new javax.swing.table.DefaultTableModel(
-            data,
-            new String [] {
-                "PROJECT ID", "PROJECT NAME"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        ProjectGrid.addMouseListener(new java.awt.event.MouseAdapter() {
+        assignDonation1.setBackground(new java.awt.Color(15, 22, 38));
+        assignDonation1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        assignDonation1.setForeground(new java.awt.Color(200, 200, 200));
+        assignDonation1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        assignDonation1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/briefing.png"))); // NOI18N
+        assignDonation1.setText("Update Donation");
+        assignDonation1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(102, 102, 102)));
+        assignDonation1.setOpaque(true);
+        assignDonation1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ProjectGridMouseClicked(evt);
+                assignDonation1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                assignDonation1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                assignDonation1MouseExited(evt);
             }
         });
-        jScrollPane1.setViewportView(ProjectGrid);
-
-        javax.swing.GroupLayout TableLayout = new javax.swing.GroupLayout(Table);
-        Table.setLayout(TableLayout);
-        TableLayout.setHorizontalGroup(
-            TableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TableLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64))
-        );
-        TableLayout.setVerticalGroup(
-            TableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TableLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61))
-        );
-
-        jPanel1.add(Table, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 283, 479, 287));
+        jPanel1.add(assignDonation1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 410, 150, 54));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -427,6 +366,9 @@ public class DonationDetails extends javax.swing.JFrame {
 
     private void manageOrganizationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseClicked
         // TODO add your handling code here:
+        ManageOrganization mo = new ManageOrganization();
+        mo.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_manageOrganizationMouseClicked
 
     private void manageOrganizationMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseEntered
@@ -513,52 +455,20 @@ public class DonationDetails extends javax.swing.JFrame {
         manageDonationsMouseClicked(null);
     }//GEN-LAST:event_backMouseClicked
 
-    private void assignDonationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_assignDonationMouseClicked
+    private void assignDonation1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_assignDonation1MouseClicked
         // TODO add your handling code here:
-        if(notAssigned)
-        {
-            try
-                {
-                    Integer row = ProjectGrid.getSelectedRow();
-                    String value = ProjectGrid.getModel().getValueAt(row, 0).toString();
-                    
-                    Project p = Login.org.getProject(Integer.valueOf(value));
-                    
-                    Donation donation = Login.org.getDonation(donationID);
-                    
-                    donation.assignToProject(p);
+        UpdateDonation ud = new UpdateDonation(donationID);
+        ud.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_assignDonation1MouseClicked
 
-                    assignedLabel.setText((donation.getAssociatedProject()!=null)?donation.getAssociatedProject().getName():"Organization");
-                   
-                }
-                catch(Exception e)
-                {
-                    message.setText("No project is specified!");
-                }
-        }
-    }//GEN-LAST:event_assignDonationMouseClicked
-
-    private void assignDonationMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_assignDonationMouseEntered
+    private void assignDonation1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_assignDonation1MouseEntered
         // TODO add your handling code here:
-        if(notAssigned)
-        {
-            assignDonation.setBackground(Dashboard.buttonHighlight);
-            assignDonation.setForeground(Dashboard.coral);
-        }
-    }//GEN-LAST:event_assignDonationMouseEntered
+    }//GEN-LAST:event_assignDonation1MouseEntered
 
-    private void assignDonationMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_assignDonationMouseExited
+    private void assignDonation1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_assignDonation1MouseExited
         // TODO add your handling code here:
-        if(notAssigned)
-        {
-            assignDonation.setBackground(Dashboard.navyBlue);
-            assignDonation.setForeground(Dashboard.primaryTextColor);
-        }
-    }//GEN-LAST:event_assignDonationMouseExited
-
-    private void ProjectGridMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProjectGridMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ProjectGridMouseClicked
+    }//GEN-LAST:event_assignDonation1MouseExited
 
     /**
      * @param args the command line arguments
@@ -601,9 +511,7 @@ public class DonationDetails extends javax.swing.JFrame {
     private javax.swing.JLabel ManageDonationBar;
     private javax.swing.JLabel ManageDonorsBar;
     private javax.swing.JLabel ManageProjectBar;
-    private javax.swing.JTable ProjectGrid;
-    private javax.swing.JPanel Table;
-    private javax.swing.JLabel assignDonation;
+    private javax.swing.JLabel assignDonation1;
     private javax.swing.JLabel assignedLabel;
     private javax.swing.JLabel back;
     private javax.swing.JLabel donorLabel;
@@ -615,7 +523,6 @@ public class DonationDetails extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel manageDonations;
     private javax.swing.JLabel manageDonors;
     private javax.swing.JLabel manageOrganization;

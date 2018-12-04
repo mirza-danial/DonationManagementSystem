@@ -16,6 +16,16 @@ public class Project extends Entity {
     public List<Donation> getDonations() {
         return donations;
     }
+    public void removeDonation(Donation d)
+    {
+        for(Donation i : donations)
+        {
+            if(i.equals(d))
+            {
+                donations.remove(d);
+            }
+        }
+    }
     public List<Volunteer> getVolunteers() {
         return volunteers;
     }
