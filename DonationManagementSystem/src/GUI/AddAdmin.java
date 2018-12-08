@@ -522,7 +522,7 @@ public class AddAdmin extends javax.swing.JFrame {
 
     private void backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseClicked
         // TODO add your handling code here:
-        manageDonorsMouseClicked(null);
+        manageOrganizationMouseClicked(null);
     }//GEN-LAST:event_backMouseClicked
 
     /**

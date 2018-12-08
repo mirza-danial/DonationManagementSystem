@@ -632,7 +632,7 @@ public class UpdateDonation extends javax.swing.JFrame {
 
                     donation.assignToProject(p);
 
-                    Login.admin.addDonationToProject(donation, Integer.valueOf(value));
+                    Login.admin.assignDonationToProject(donation, Integer.valueOf(value));
                     DonationDetails dd = new DonationDetails(donationID);
                     dd.setVisible(true);
                     this.dispose();

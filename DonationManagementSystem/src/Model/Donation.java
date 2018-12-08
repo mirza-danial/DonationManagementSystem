@@ -2,7 +2,7 @@ package Model;
 
 import java.util.Date;
 
-public class Donation extends Entity {
+public class Donation  {
 
     private int id;
 

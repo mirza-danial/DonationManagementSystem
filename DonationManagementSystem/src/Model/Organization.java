@@ -150,7 +150,12 @@ public class Organization extends Entity{
         return (Project) getEntity(allProjects, id);
     }
     public Donation getDonation(int id){
-        return (Donation) getEntity(allDonations, id);
+        for(Donation e: allDonations){
+            Donation x = e;
+            if(x.getId() == id)
+                return x;
+        }
+        return null;
     }
     
     List<Project> getAllProjects() {

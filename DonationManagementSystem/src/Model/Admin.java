@@ -19,6 +19,10 @@ public class Admin extends Entity {
         Project pr = org.getProject(projID);
         pr.addDonation(donation);
     }
+     public void assignDonationToProject(Donation donation, int projID){
+        Project pr = org.getProject(projID);
+        pr.addDonation(donation);
+    }
     public boolean addDonationToOrg(Donation d, Donor donor){
         return org.addDonation(d);
     }
