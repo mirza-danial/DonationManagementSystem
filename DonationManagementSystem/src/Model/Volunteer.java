@@ -7,8 +7,8 @@ public class Volunteer extends Entity {
         return assignedProj;
     }
 
-    public void setAssignedProj(Project assignedProj) {
-        this.assignedProj = assignedProj;
+    public void setAssignedProj(Project p) {
+        this.assignedProj = p;
     }
 
     Volunteer(int id, String name) {

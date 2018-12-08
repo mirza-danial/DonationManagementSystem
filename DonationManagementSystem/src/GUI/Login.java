@@ -10,6 +10,8 @@ import Model.Admin;
 import Model.Organization;
 import Model.Project;
 import java.awt.Image;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
@@ -29,15 +31,14 @@ public class Login extends javax.swing.JFrame {
         
         // Test values will be changed when database will be entered
         
-        org = new Organization("FastCare", "Charity Org");
+        org = new Organization(1, "FastCare", "Charity Org");
+
         Admin a = org.createNewAdmin();
-        
         a.setName("Raphy");
         a.setOrg(org);
         a.setUserName("raphy_n");
         a.setPassword("123");
         
-       
         Donor d = a.createNewDonor();
         d.setName("Danial");
         d.setAddr("Model Town", "Lahore", "Pakistan");
@@ -50,7 +51,6 @@ public class Login extends javax.swing.JFrame {
         
         initComponents();
             
-        
     }
 
     /**
@@ -119,11 +119,11 @@ public class Login extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 LoginMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                LoginMouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 LoginMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                LoginMouseEntered(evt);
             }
         });
         getContentPane().add(Login);
@@ -215,6 +215,8 @@ public class Login extends javax.swing.JFrame {
         
     }//GEN-LAST:event_LoginMouseClicked
 
+    
+    
     /**
      * @param args the command line arguments
      */

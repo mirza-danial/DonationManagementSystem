@@ -18,6 +18,9 @@ public class ManageAdmin extends javax.swing.JFrame {
     public ManageAdmin() {
         initComponents();
         nameLabel.setText(Login.admin.getName());
+        
+        //add window closing listener
+        this.addWindowListener(new WindowCloser());
     }
 
     /**
@@ -53,6 +56,7 @@ public class ManageAdmin extends javax.swing.JFrame {
         addDonor2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(799, 717));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -254,6 +258,14 @@ public class ManageAdmin extends javax.swing.JFrame {
         message.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         ProjectGrid.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        ProjectGrid.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
         ProjectGrid.setSelectionBackground(new java.awt.Color(255, 83, 61));
         ProjectGrid.setSelectionForeground(new java.awt.Color(15, 22, 38));
         ProjectGrid.setShowVerticalLines(false);
@@ -295,11 +307,11 @@ public class ManageAdmin extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 addDonor1MouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                addDonor1MouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 addDonor1MouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                addDonor1MouseEntered(evt);
             }
         });
 
@@ -495,6 +507,9 @@ public class ManageAdmin extends javax.swing.JFrame {
 
     private void addDonor1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addDonor1MouseClicked
         // TODO add your handling code here:
+        AddAdmin ad = new AddAdmin();
+        ad.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_addDonor1MouseClicked
 
     private void addDonor1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addDonor1MouseEntered

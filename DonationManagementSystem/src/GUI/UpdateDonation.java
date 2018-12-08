@@ -48,6 +48,9 @@ public class UpdateDonation extends javax.swing.JFrame {
     public UpdateDonation() {
         initComponents();
         nameLabel.setText(Login.admin.getName());
+        
+        //add window closing listener
+        this.addWindowListener(new WindowCloser());
     }
 
     /**
@@ -97,6 +100,7 @@ public class UpdateDonation extends javax.swing.JFrame {
         assignToNewProject = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(799, 717));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -331,7 +335,7 @@ public class UpdateDonation extends javax.swing.JFrame {
                 projectActionPerformed(evt);
             }
         });
-        jPanel1.add(project, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 170, 73, -1));
+        jPanel1.add(project, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 170, 100, -1));
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         jLabel6.setText("PKRs");

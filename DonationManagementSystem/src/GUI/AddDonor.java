@@ -19,6 +19,9 @@ public class AddDonor extends javax.swing.JFrame {
     public AddDonor() {
         initComponents();
         nameLabel.setText(Login.admin.getName());
+        
+        //add window closing listener
+        this.addWindowListener(new WindowCloser());
     }
 
     /**
@@ -61,6 +64,7 @@ public class AddDonor extends javax.swing.JFrame {
         donorPhoneLabel = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(799, 717));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -544,8 +548,7 @@ public class AddDonor extends javax.swing.JFrame {
 
         if(!name.isEmpty() && !phone.isEmpty() && !location.isEmpty() && !city.isEmpty() && !country.isEmpty() )
         {
-            Project p = Login.admin.createNewProject();
-
+          
             
             Donor d = Login.admin.createNewDonor();
             d.setName(name);

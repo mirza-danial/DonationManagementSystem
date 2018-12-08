@@ -15,6 +15,7 @@ public class Admin extends Entity {
     }
 
     public void addDonationToProject(Donation donation, int projID){
+        org.addDonation(donation);
         Project pr = org.getProject(projID);
         pr.addDonation(donation);
     }
@@ -64,7 +65,23 @@ public class Admin extends Entity {
     public boolean updateDonor(Donor d){
         return org.updateDonor(d);
     }
-
+    public boolean updateDonation(Donation d){
+        return org.updateDonation(d);
+    }
+    
+    public Project getProject(int id){
+        return org.getProject(id);
+    }
+    public Donor getDonor(int id){
+        return org.getDonor(id);
+    }
+    public Volunteer getVolunteer(int id){
+        return org.getVolunteer(id);
+    }
+    public Donation getDonation(int id){
+        return org.getDonation(id);
+    }
+    
     public List<Project> getAllProjects() {
         return org.getAllProjects();
     }

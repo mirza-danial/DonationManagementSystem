@@ -1,21 +1,26 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class Organization {
-    List<Project> allProjects;
-    List<Admin> allAdmins;
-    List<Donor> allDonors;
-    List<Volunteer> allVolunteers;
-    List<Donation> allDonations;
-
-    public String title;
-    public String description;
-    public Organization(String title, String descr) {
-        this.title = title;
-        description = descr;
-
+public class Organization extends Entity{
+    
+    private Date startDate;
+    private boolean isActive;
+    
+    private List<Project> allProjects;
+    private List<Admin> allAdmins;
+    private List<Donor> allDonors;
+    private List<Volunteer> allVolunteers;
+    private List<Donation> allDonations;
+    
+    public Organization(int id, String name, String descr) {
+        super(id, name);
+        super.setDescritpion(descr);
+        startDate = new Date();
+        isActive = true;
+        
         allProjects = new ArrayList<>();
         allAdmins = new ArrayList<>();
         allDonors = new ArrayList<>();
@@ -23,8 +28,21 @@ public class Organization {
         allDonations = new ArrayList<>();
     }
 
+    public Date getStartDate() {
+        return startDate;
+    }
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+    public boolean isIsActive() {
+        return isActive;
+    }
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+    
     public String toString(){
-        String x = "---Organization details---\nTitle: " + title;
+        String x = "---Organization details---\nTitle: " + name;
         x += "\nDescritpion: " + description;
         x += "\nProjects: " + allProjects.size();
         x += "\nDonors: " + allDonors.size();
@@ -34,12 +52,6 @@ public class Organization {
         return x + "\n";
     }
     
-    public Admin createNewAdmin(){
-        int id = allAdmins.size() + 1;
-        Admin a = new Admin(id, null, null, null);
-        allAdmins.add(a);
-        return a;
-    }
     public boolean addAdmin(String fullName, String userName, String password){
         int id = allAdmins.size() + 1;
         Admin newAdmin = new Admin(id, userName, fullName, password);
@@ -53,6 +65,13 @@ public class Organization {
         return false;
     }
     
+    public Admin createNewAdmin(){
+        int id = allAdmins.size() + 1;
+        Admin a = new Admin(id, null, null, null);
+        a.setOrg(this);
+        allAdmins.add(a);
+        return a;
+    }
     Project createNewProject() {
         int id = allProjects.size() + 1;
         Project p = new Project(id, null);
@@ -68,7 +87,7 @@ public class Organization {
     Donation createNewDonation() {
         int id = allDonations.size() + 1;
         Donation d = new Donation(id);
-        allDonations.add(d);
+        //allDonations.add(d);
         return d;
     }
     Volunteer createNewVolunteer() {
@@ -102,13 +121,16 @@ public class Organization {
     }
 
     boolean updateVolunteer(Volunteer v) {
-        return removeFromList(allVolunteers, v);
+        return updateInList(allVolunteers, v);
     }
     boolean updateProject(Project p) {
-        return removeFromList(allProjects, p);
+        return updateInList(allProjects, p);
     }
     boolean updateDonor(Donor d) {
-        return removeFromList(allDonors, d);
+        return updateInList(allDonors, d);
+    }
+    boolean updateDonation(Donation d){
+        return updateInList(allDonations, d);
     }
     
     public Admin getAdmin(String userName, String password){
@@ -118,7 +140,6 @@ public class Organization {
         }
         return null;
     }
-
     public Donor getDonor(int id){
         return (Donor)getEntity(allDonors, id);
     }
@@ -128,7 +149,10 @@ public class Organization {
     public Project getProject(int id){
         return (Project) getEntity(allProjects, id);
     }
-
+    public Donation getDonation(int id){
+        return (Donation) getEntity(allDonations, id);
+    }
+    
     List<Project> getAllProjects() {
         return allProjects;
     }
@@ -154,7 +178,7 @@ public class Organization {
         int id = list.size() + 1;
         return list.add(e);
     }
-    private <E> boolean removeFromList(List<E> list, E entity){
+    private <E> boolean updateInList(List<E> list, E entity){
         int ind = list.indexOf(entity);
         if(ind >= 0)
             list.set(ind, entity);
@@ -169,26 +193,6 @@ public class Organization {
             sum += d.getValue();
         }
         return sum;
-    }
-    
-    public Donation getDonation(int id)
-    {
-        for(Donation d: allDonations)
-        {
-            if(d.getId() == id)
-            {
-                return d;
-            }
-        }
-        return null;
-    }
-    public void setTitle(String name)
-    {
-        this.title = title;
-    }
-    public void setDescription(String description)
-    {
-        this.description = description;
     }
             
     public List<Admin> getAllAdmins()

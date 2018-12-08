@@ -19,8 +19,8 @@ public class UpdateOrganization extends javax.swing.JFrame {
     public UpdateOrganization() {
         initComponents();
         
-        organizationNameField.setText(Login.org.title);
-        organizationDescriptionField.setText(Login.org.description);
+        organizationNameField.setText(Login.org.getName());
+        organizationDescriptionField.setText(Login.org.getDescritpion());
         /*
             Change folowing code
         */
@@ -29,6 +29,9 @@ public class UpdateOrganization extends javax.swing.JFrame {
         //organizationAddressField.setText(Login.org.);
         
         nameLabel.setText(Login.admin.getName());
+        
+        //add window closing listener
+        this.addWindowListener(new WindowCloser());
     }
 
     /**
@@ -70,6 +73,7 @@ public class UpdateOrganization extends javax.swing.JFrame {
         organizationDescriptionField = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(799, 717));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -518,8 +522,8 @@ public class UpdateOrganization extends javax.swing.JFrame {
 
     private void updateDetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateDetailsMouseClicked
         // TODO add your handling code here:
-        Login.org.setTitle(organizationNameField.getText());
-        Login.org.setDescription(organizationDescriptionField.getText());
+        Login.org.setName(organizationNameField.getText());
+        Login.org.setDescritpion(organizationDescriptionField.getText());
         /*
            Code to be modified
         */

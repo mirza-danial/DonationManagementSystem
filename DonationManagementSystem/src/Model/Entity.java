@@ -4,11 +4,11 @@ import java.util.*;
 import java.util.Objects;
 
 abstract class Entity {
-    private int id;
-    private String name;
-    private String descritpion;
-    private Address addr;
-    private List<String> phoneNumbers;
+    protected int id;
+    protected String name;
+    protected String description;
+    protected Address addr;
+    protected List<String> phoneNumbers;
     
     public String toString(){
         String x = "ID: " + id + ", Name: " + name;
@@ -33,7 +33,7 @@ abstract class Entity {
         this.name = name;
     }
     public void setDescritpion(String descritpion) {
-        this.descritpion = descritpion;
+        this.description = descritpion;
     }
     public void setAddr(String firstLine, String city, String country) {
         addr = new Address(firstLine, city, country);
@@ -49,7 +49,7 @@ abstract class Entity {
         return name;
     }
     public String getDescritpion() {
-        return descritpion;
+        return description;
     }
     public Address getAddr() {
         return addr;

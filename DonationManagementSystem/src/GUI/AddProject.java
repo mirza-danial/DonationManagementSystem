@@ -20,6 +20,9 @@ public class AddProject extends javax.swing.JFrame {
     public AddProject() {
         initComponents();
         nameLabel.setText(Login.admin.getName());
+        
+        //add window closing listener
+        this.addWindowListener(new WindowCloser());
     }
 
     /**
@@ -63,6 +66,7 @@ public class AddProject extends javax.swing.JFrame {
         message = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(799, 717));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 

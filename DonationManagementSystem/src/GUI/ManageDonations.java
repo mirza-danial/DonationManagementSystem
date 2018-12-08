@@ -20,6 +20,9 @@ public class ManageDonations extends javax.swing.JFrame {
     public ManageDonations() {
         initComponents();
         nameLabel2.setText(Login.admin.getName());
+        
+        //add window closing listener
+        this.addWindowListener(new WindowCloser());
     }
 
     /**

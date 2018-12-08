@@ -24,11 +24,15 @@ public class AddDonation extends javax.swing.JFrame {
         this();
         donorID = ID;
         donate2Project = false;
+        
     }
     
     public AddDonation() {
         initComponents();
         nameLabel.setText(Login.admin.getName());
+
+        //add window closing listener
+        this.addWindowListener(new WindowCloser());
     }
 
     /**
@@ -72,6 +76,7 @@ public class AddDonation extends javax.swing.JFrame {
         message = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(799, 717));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -391,7 +396,7 @@ public class AddDonation extends javax.swing.JFrame {
                                         .addGap(58, 58, 58)
                                         .addComponent(organization)
                                         .addGap(38, 38, 38)
-                                        .addComponent(project, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(project, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel5)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)

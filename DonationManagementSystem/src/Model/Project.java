@@ -4,43 +4,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Project extends Entity {
-    private List<Volunteer> volunteers;
-    private List<Donation> donations;
+    private List<Volunteer> volunteersInProject;
+    private List<Donation> donationsForProject;
 
     Project(int id, String name) {
         super(id+200, name);
-        volunteers = new ArrayList<>();
-        donations = new ArrayList<>();
+        volunteersInProject = new ArrayList<>();
+        donationsForProject = new ArrayList<>();
     }
     
     public List<Donation> getDonations() {
-        return donations;
+        return donationsForProject;
     }
     public void removeDonation(Donation d)
     {
-        for(Donation i : donations)
+        for(Donation i : donationsForProject)
         {
             if(i.equals(d))
             {
-                donations.remove(d);
+                donationsForProject.remove(d);
             }
         }
     }
     public List<Volunteer> getVolunteers() {
-        return volunteers;
+        return volunteersInProject;
     }
 
-    public boolean addVolunteer(Volunteer v){
-        return volunteers.add(v);
+    public boolean addVolunteer(Volunteer v) throws Exception{
+        if(v.getAssignedProj() != null)
+            throw new Exception("Volunteer already assigned to Project: " + v.getAssignedProj());
+        v.setAssignedProj(this);
+        return volunteersInProject.add(v);
     }
     public boolean addDonation(Donation d){
-        return donations.add(d);
+        return donationsForProject.add(d);
     }
     
     public String toString(){
         String x = super.toString();
-        x += "\nVolunteers associated:\n" + volunteers;
-        x += "\nDonations allocated:\n" + donations;
+        x += "\nVolunteers associated:\n" + volunteersInProject;
+        x += "\nDonations allocated:\n" + donationsForProject;
         return x;
     }
 }
