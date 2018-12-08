@@ -7,6 +7,7 @@ package GUI;
 
 import java.awt.Color;
 import Model.*;
+import java.awt.Toolkit;
 
 /**
  *
@@ -18,6 +19,8 @@ public class AddProject extends javax.swing.JFrame {
      * Creates new form AddProject
      */
     public AddProject() {
+        setTitle("Donation Management System");
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/donation.png")));
         initComponents();
         nameLabel.setText(Login.admin.getName());
         

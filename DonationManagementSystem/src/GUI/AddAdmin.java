@@ -5,6 +5,7 @@
  */
 package GUI;
 import java.awt.Color;
+import java.awt.Toolkit;
 /**
  *
  * @author mirza
@@ -16,6 +17,8 @@ public class AddAdmin extends javax.swing.JFrame {
      */
     public AddAdmin() {
         initComponents();
+        setTitle("Donation Management System");
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/donation.png")));
         nameLabel.setText(Login.admin.getName());
     }
 

@@ -10,6 +10,7 @@ import Model.Admin;
 import Model.Organization;
 import Model.Project;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.Icon;
@@ -30,7 +31,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         
         // Test values will be changed when database will be entered
-        
+       
         org = new Organization(1, "FastCare", "Charity Org");
 
         Admin a = org.createNewAdmin();
@@ -49,6 +50,16 @@ public class Login extends javax.swing.JFrame {
         p.setName("TCF Schools");
         p.setAddr("Line 1", "Lahore", "Pakistan");
         
+        // this code will be uncommented after loadDBS
+        
+//        if(org == null)
+//        {
+//            NoOrganizationFound o =new NoOrganizationFound();
+//            o.setVisible(true);
+//            this.dispose();
+//        }
+        setTitle("Donation Management System");
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/donation.png")));
         initComponents();
             
     }

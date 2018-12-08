@@ -6,6 +6,7 @@
 package GUI;
 import Model.*;
 import java.awt.Color;
+import java.awt.Toolkit;
 import java.util.*;
 /**
  *
@@ -31,6 +32,8 @@ public class DonationDetails extends javax.swing.JFrame {
     }
     
     public DonationDetails() {
+        setTitle("Donation Management System");
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/donation.png")));
         initComponents();
         nameLabel.setText(Login.admin.getName());
         

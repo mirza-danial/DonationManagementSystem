@@ -8,6 +8,7 @@ package GUI;
 import java.awt.Color;
 import java.util.*;
 import Model.*;
+import java.awt.Toolkit;
 /**
  *
  * @author Danial
@@ -18,6 +19,8 @@ public class ManageDonations extends javax.swing.JFrame {
      * Creates new form ManageDonations
      */
     public ManageDonations() {
+        setTitle("Donation Management System");
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/donation.png")));
         initComponents();
         nameLabel2.setText(Login.admin.getName());
         

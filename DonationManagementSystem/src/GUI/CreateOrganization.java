@@ -6,6 +6,7 @@
 package GUI;
 import Database.PersistentDB;
 import Model.*;
+import java.awt.Toolkit;
 /**
  *
  * @author Danial
@@ -16,6 +17,8 @@ public class CreateOrganization extends javax.swing.JFrame {
      * Creates new form CreateOrganization
      */
     public CreateOrganization() {
+        setTitle("Donation Management System");
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/donation.png")));
         initComponents();
     }
 

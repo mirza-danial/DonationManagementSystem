@@ -6,6 +6,7 @@
 package GUI;
 
 import java.awt.Color;
+import java.awt.Toolkit;
 
 /**
  *
@@ -17,6 +18,8 @@ public class UpdateOrganization extends javax.swing.JFrame {
      * Creates new form UpdateOrganization
      */
     public UpdateOrganization() {
+        setTitle("Donation Management System");
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/donation.png")));
         initComponents();
         
         organizationNameField.setText(Login.org.getName());

@@ -8,6 +8,7 @@ package GUI;
 import java.awt.Color;
 import java.util.*;
 import Model.*;
+import java.awt.Toolkit;
 
 /**
  *
@@ -16,6 +17,8 @@ import Model.*;
 public class ManageAdmin extends javax.swing.JFrame {
 
     public ManageAdmin() {
+        setTitle("Donation Management System");
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/donation.png")));
         initComponents();
         nameLabel.setText(Login.admin.getName());
         

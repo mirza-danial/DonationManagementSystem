@@ -7,6 +7,7 @@ package GUI;
 import java.awt.Color;
 import java.util.*;
 import Model.*;
+import java.awt.Toolkit;
 /**
  *
  * @author Danial
@@ -17,6 +18,8 @@ public class AddDonor extends javax.swing.JFrame {
      * Creates new form AddDonor
      */
     public AddDonor() {
+        setTitle("Donation Management System");
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/donation.png")));
         initComponents();
         nameLabel.setText(Login.admin.getName());
         

@@ -6,6 +6,7 @@
 package GUI;
 import Database.PersistentDB;
 import Model.*;
+import java.awt.Toolkit;
 /**
  *
  * @author Danial
@@ -22,6 +23,8 @@ public class CreateAdmin extends javax.swing.JFrame {
         organization = org;
     }
     public CreateAdmin() {
+        setTitle("Donation Management System");
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/donation.png")));
         initComponents();
     }
 

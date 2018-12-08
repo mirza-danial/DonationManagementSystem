@@ -6,6 +6,7 @@
 package GUI;
 
 import java.awt.Color;
+import java.awt.Toolkit;
 
 /**
  *
@@ -23,6 +24,8 @@ public class Dashboard extends javax.swing.JFrame {
     
     
     public Dashboard() {
+        setTitle("Donation Management System");
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/donation.png")));
         initComponents();
         nameLabel.setText(Login.admin.getName());
         welcomeNameLabel.setText(Login.admin.getName());
