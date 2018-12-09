@@ -24,6 +24,8 @@ public class ManageOrganization extends javax.swing.JFrame {
         nameLabel.setText(Login.admin.getName());
         TitleLabel.setText(Login.org.getName());
         descriptionLabel.setText(Login.org.getDescritpion());
+        phoneLabel.setText((Login.org.getPhoneNumbers().isEmpty())?"Not Available":Login.org.getPhoneNumbers().get(0));
+        addressLabel.setText((Login.org.getAddr() != null)?Login.org.getAddr().toString():"Not Available" );
         
         //add window closing listener
         this.addWindowListener(new WindowCloser());

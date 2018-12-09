@@ -24,14 +24,14 @@ public class UpdateOrganization extends javax.swing.JFrame {
         initComponents();
         
         organizationNameField.setText(Login.org.getName());
-        organizationDescriptionField.setText(Login.org.getDescritpion());
-        /*
-            Change folowing code
-        */
-
-        //organizationPhoneField.setText(Login.org.);
-        //organizationAddressField.setText(Login.org.);
-        
+        organizationDescriptionField.setText(Login.org.getDescritpion());        
+        organizationPhoneField.setText((Login.org.getPhoneNumbers().isEmpty())?"Not Available":Login.org.getPhoneNumbers().get(0));
+        if(Login.org.getAddr() != null)
+        {
+            organizationLineField.setText((Login.org.getAddr().getAddrLine()!= null)?Login.org.getAddr().getAddrLine():"N/A");
+            organizationCityField.setText((Login.org.getAddr().getCity()!= null)?Login.org.getAddr().getCity():"N/a");
+            organizationCountryField.setText((Login.org.getAddr().getCountry()!=null)?Login.org.getAddr().getCountry():"N/A");
+        }
         nameLabel.setText(Login.admin.getName());
         
         //add window closing listener
@@ -71,11 +71,14 @@ public class UpdateOrganization extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         organizationNameField = new javax.swing.JTextField();
-        donorNameLabel1 = new javax.swing.JTextField();
         organizationPhoneField = new javax.swing.JTextField();
-        organizationAddressField = new javax.swing.JTextField();
+        organizationLineField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         organizationDescriptionField = new javax.swing.JTextArea();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        organizationCountryField = new javax.swing.JTextField();
+        organizationCityField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(799, 717));
@@ -282,7 +285,7 @@ public class UpdateOrganization extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ManageDonorsBar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(manageDonors, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40))
         );
@@ -298,7 +301,7 @@ public class UpdateOrganization extends javax.swing.JFrame {
         jLabel10.setText("Phone Number");
 
         jLabel14.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel14.setText("Address:");
+        jLabel14.setText("Country");
 
         updateDetails.setBackground(new java.awt.Color(15, 22, 38));
         updateDetails.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -332,13 +335,6 @@ public class UpdateOrganization extends javax.swing.JFrame {
             }
         });
 
-        donorNameLabel1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        donorNameLabel1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                donorNameLabel1ActionPerformed(evt);
-            }
-        });
-
         organizationPhoneField.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         organizationPhoneField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -346,10 +342,10 @@ public class UpdateOrganization extends javax.swing.JFrame {
             }
         });
 
-        organizationAddressField.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        organizationAddressField.addActionListener(new java.awt.event.ActionListener() {
+        organizationLineField.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        organizationLineField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                organizationAddressFieldActionPerformed(evt);
+                organizationLineFieldActionPerformed(evt);
             }
         });
 
@@ -357,6 +353,26 @@ public class UpdateOrganization extends javax.swing.JFrame {
         organizationDescriptionField.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
         organizationDescriptionField.setRows(5);
         jScrollPane1.setViewportView(organizationDescriptionField);
+
+        jLabel15.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel15.setText("Line Address");
+
+        jLabel16.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel16.setText("City");
+
+        organizationCountryField.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        organizationCountryField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                organizationCountryFieldActionPerformed(evt);
+            }
+        });
+
+        organizationCityField.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        organizationCityField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                organizationCityFieldActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -366,7 +382,7 @@ public class UpdateOrganization extends javax.swing.JFrame {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                         .addComponent(back)
                         .addGap(543, 543, 543))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -375,17 +391,20 @@ public class UpdateOrganization extends javax.swing.JFrame {
                             .addComponent(jLabel10)
                             .addComponent(jLabel14)
                             .addComponent(jLabel11)
-                            .addComponent(jLabel12))
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel16))
                         .addGap(40, 40, 40)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(donorNameLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(organizationNameField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(organizationPhoneField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(organizationAddressField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 136, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(organizationNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(organizationPhoneField, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(organizationLineField, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(organizationCountryField, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(organizationCityField, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 156, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(220, 220, 220)
+                        .addGap(222, 222, 222)
                         .addComponent(updateDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
@@ -395,27 +414,36 @@ public class UpdateOrganization extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(back)
-                .addGap(110, 110, 110)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(organizationNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(111, 111, 111)
+                        .addComponent(organizationNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel11)))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(organizationPhoneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(organizationAddressField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(organizationLineField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(97, 97, 97)
+                    .addComponent(organizationCityField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(organizationCountryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addGap(55, 55, 55)
                 .addComponent(updateDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
-                .addComponent(donorNameLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(98, 98, 98))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -548,11 +576,13 @@ public class UpdateOrganization extends javax.swing.JFrame {
         // TODO add your handling code here:
         Login.org.setName(organizationNameField.getText());
         Login.org.setDescritpion(organizationDescriptionField.getText());
-        /*
-           Code to be modified
-        */
-        //Login.org.setPhoneNumber(organizationPhoneField.getText());
-        //Login.org.setAddressNumber(organizationAddressField.getText());
+        Login.org.getPhoneNumbers().add(0,(organizationPhoneField.getText()));
+        
+        String line = organizationLineField.getText();
+        String city = organizationCityField.getText();
+        String country = organizationCountryField.getText();
+        
+        Login.org.setAddr(line, city, country);
         
         backMouseClicked(null);
     }//GEN-LAST:event_updateDetailsMouseClicked
@@ -573,17 +603,13 @@ public class UpdateOrganization extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_organizationNameFieldActionPerformed
 
-    private void donorNameLabel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_donorNameLabel1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_donorNameLabel1ActionPerformed
-
     private void organizationPhoneFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_organizationPhoneFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_organizationPhoneFieldActionPerformed
 
-    private void organizationAddressFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_organizationAddressFieldActionPerformed
+    private void organizationLineFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_organizationLineFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_organizationAddressFieldActionPerformed
+    }//GEN-LAST:event_organizationLineFieldActionPerformed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here:
@@ -608,6 +634,14 @@ public class UpdateOrganization extends javax.swing.JFrame {
         this.dispose();
 
     }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void organizationCountryFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_organizationCountryFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_organizationCountryFieldActionPerformed
+
+    private void organizationCityFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_organizationCityFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_organizationCityFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -651,12 +685,12 @@ public class UpdateOrganization extends javax.swing.JFrame {
     private javax.swing.JLabel ManageDonorsBar;
     private javax.swing.JLabel ManageProjectBar;
     private javax.swing.JLabel back;
-    private javax.swing.JTextField donorNameLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -670,8 +704,10 @@ public class UpdateOrganization extends javax.swing.JFrame {
     private javax.swing.JLabel manageOrganizationBar;
     private javax.swing.JLabel manageProjects;
     private javax.swing.JLabel nameLabel;
-    private javax.swing.JTextField organizationAddressField;
+    private javax.swing.JTextField organizationCityField;
+    private javax.swing.JTextField organizationCountryField;
     private javax.swing.JTextArea organizationDescriptionField;
+    private javax.swing.JTextField organizationLineField;
     private javax.swing.JTextField organizationNameField;
     private javax.swing.JTextField organizationPhoneField;
     private javax.swing.JLabel updateDetails;
