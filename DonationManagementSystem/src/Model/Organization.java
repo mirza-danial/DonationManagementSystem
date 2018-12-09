@@ -15,6 +15,9 @@ public class Organization extends Entity{
     private List<Volunteer> allVolunteers;
     private List<Donation> allDonations;
     
+    /*Haider Addition staticAdminCount to Assign IDs */
+    private static int staticAdminCount = 0;
+    
     public Organization(int id, String name, String descr) {
         super(id, name);
         super.setDescritpion(descr);
@@ -53,7 +56,30 @@ public class Organization extends Entity{
     }
     
     public boolean addAdmin(String fullName, String userName, String password){
-        int id = allAdmins.size() + 1;
+        /*Raphael's Code*/
+        //********************************//
+        //int id = allAdmins.size() + 1; 
+        //********************************//
+        
+        /*Changes introduced by Haider*/
+        //********************************//
+        //int id = staticAdminCount + 1;
+        //staticAdminCount++;
+        //********************************//
+        
+        /*Changes introduced by Danial*/
+        //********************************//
+        int maxID = -1;
+        for(Admin a: allAdmins)
+        {
+            if(a.getId() > maxID)
+            {
+                maxID = a.getId();
+            }
+        }
+        int id = maxID + 1; 
+        //********************************//
+        
         Admin newAdmin = new Admin(id, userName, fullName, password);
         return allAdmins.add(newAdmin);
     }
@@ -66,7 +92,20 @@ public class Organization extends Entity{
     }
     
     public Admin createNewAdmin(){
-        int id = allAdmins.size() + 1;
+        //int id = allAdmins.size() + 1;
+        /*Changes introduced by Danial*/
+        //********************************//
+        int maxID = -1;
+        for(Admin a: allAdmins)
+        {
+            if(a.getId() > maxID)
+            {
+                maxID = a.getId();
+            }
+        }
+        int id = maxID + 1; 
+        //********************************//
+        
         Admin a = new Admin(id, null, null, null);
         a.setOrg(this);
         allAdmins.add(a);

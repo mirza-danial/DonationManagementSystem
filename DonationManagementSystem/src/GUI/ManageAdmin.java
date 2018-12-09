@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.util.*;
 import Model.*;
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -52,13 +53,13 @@ public class ManageAdmin extends javax.swing.JFrame {
         ManageDonorsBar = new javax.swing.JLabel();
         Home = new javax.swing.JLabel();
         HomeBar = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        Logout = new javax.swing.JLabel();
         back = new javax.swing.JLabel();
         message = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        ProjectGrid = new javax.swing.JTable();
-        addDonor1 = new javax.swing.JLabel();
-        addDonor2 = new javax.swing.JLabel();
+        AdminGrid = new javax.swing.JTable();
+        addAdmin = new javax.swing.JLabel();
+        deleteAdmin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(799, 717));
@@ -204,16 +205,16 @@ public class ManageAdmin extends javax.swing.JFrame {
 
         HomeBar.setBackground(new java.awt.Color(255, 83, 62));
 
-        jLabel2.setBackground(new java.awt.Color(255, 83, 61));
-        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/exit.png"))); // NOI18N
-        jLabel2.setText("Logout");
-        jLabel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jLabel2.setOpaque(true);
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        Logout.setBackground(new java.awt.Color(255, 83, 61));
+        Logout.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
+        Logout.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/exit.png"))); // NOI18N
+        Logout.setText("Logout");
+        Logout.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Logout.setOpaque(true);
+        Logout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
+                LogoutMouseClicked(evt);
             }
         });
 
@@ -238,7 +239,7 @@ public class ManageAdmin extends javax.swing.JFrame {
                     .addComponent(Home, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Logout, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
         );
         jPanel6Layout.setVerticalGroup(
@@ -266,7 +267,7 @@ public class ManageAdmin extends javax.swing.JFrame {
                     .addComponent(ManageDonorsBar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(manageDonors, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Logout, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40))
         );
 
@@ -281,8 +282,8 @@ public class ManageAdmin extends javax.swing.JFrame {
         message.setForeground(new java.awt.Color(255, 0, 0));
         message.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        ProjectGrid.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        ProjectGrid.setModel(new javax.swing.table.DefaultTableModel(
+        AdminGrid.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        AdminGrid.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -290,9 +291,9 @@ public class ManageAdmin extends javax.swing.JFrame {
 
             }
         ));
-        ProjectGrid.setSelectionBackground(new java.awt.Color(255, 83, 61));
-        ProjectGrid.setSelectionForeground(new java.awt.Color(15, 22, 38));
-        ProjectGrid.setShowVerticalLines(false);
+        AdminGrid.setSelectionBackground(new java.awt.Color(255, 83, 61));
+        AdminGrid.setSelectionForeground(new java.awt.Color(15, 22, 38));
+        AdminGrid.setShowVerticalLines(false);
         List<Admin> record = Login.org.getAllAdmins();
         String [][] data = new String [record.size()][2];
 
@@ -304,7 +305,7 @@ public class ManageAdmin extends javax.swing.JFrame {
             i++;
         }
 
-        ProjectGrid.setModel(new javax.swing.table.DefaultTableModel(
+        AdminGrid.setModel(new javax.swing.table.DefaultTableModel(
             data,
             new String [] {
                 "ADMIN ID", "ADMIN NAME"
@@ -318,43 +319,43 @@ public class ManageAdmin extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(ProjectGrid);
+        jScrollPane1.setViewportView(AdminGrid);
 
-        addDonor1.setBackground(new java.awt.Color(15, 22, 38));
-        addDonor1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        addDonor1.setForeground(new java.awt.Color(200, 200, 200));
-        addDonor1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        addDonor1.setText("Add Admin");
-        addDonor1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(102, 102, 102)));
-        addDonor1.setOpaque(true);
-        addDonor1.addMouseListener(new java.awt.event.MouseAdapter() {
+        addAdmin.setBackground(new java.awt.Color(15, 22, 38));
+        addAdmin.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        addAdmin.setForeground(new java.awt.Color(200, 200, 200));
+        addAdmin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        addAdmin.setText("Add Admin");
+        addAdmin.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(102, 102, 102)));
+        addAdmin.setOpaque(true);
+        addAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addDonor1MouseClicked(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                addDonor1MouseExited(evt);
+                addAdminMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                addDonor1MouseEntered(evt);
+                addAdminMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                addAdminMouseExited(evt);
             }
         });
 
-        addDonor2.setBackground(new java.awt.Color(15, 22, 38));
-        addDonor2.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        addDonor2.setForeground(new java.awt.Color(200, 200, 200));
-        addDonor2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        addDonor2.setText("Update Admin");
-        addDonor2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(102, 102, 102)));
-        addDonor2.setOpaque(true);
-        addDonor2.addMouseListener(new java.awt.event.MouseAdapter() {
+        deleteAdmin.setBackground(new java.awt.Color(15, 22, 38));
+        deleteAdmin.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        deleteAdmin.setForeground(new java.awt.Color(200, 200, 200));
+        deleteAdmin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        deleteAdmin.setText("Delete Admin");
+        deleteAdmin.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(102, 102, 102)));
+        deleteAdmin.setOpaque(true);
+        deleteAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addDonor2MouseClicked(evt);
+                deleteAdminMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                addDonor2MouseEntered(evt);
+                deleteAdminMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                addDonor2MouseExited(evt);
+                deleteAdminMouseExited(evt);
             }
         });
 
@@ -378,9 +379,9 @@ public class ManageAdmin extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(103, 103, 103)
-                        .addComponent(addDonor1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(addAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(133, 133, 133)
-                        .addComponent(addDonor2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(deleteAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -398,8 +399,8 @@ public class ManageAdmin extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(54, 54, 54)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addDonor2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addDonor1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(deleteAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -529,34 +530,79 @@ public class ManageAdmin extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_manageDonorsMouseClicked
 
-    private void addDonor1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addDonor1MouseClicked
+    private void addAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addAdminMouseClicked
         // TODO add your handling code here:
         AddAdmin ad = new AddAdmin();
         ad.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_addDonor1MouseClicked
+    }//GEN-LAST:event_addAdminMouseClicked
 
-    private void addDonor1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addDonor1MouseEntered
+    private void addAdminMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addAdminMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_addDonor1MouseEntered
+    }//GEN-LAST:event_addAdminMouseEntered
 
-    private void addDonor1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addDonor1MouseExited
+    private void addAdminMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addAdminMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_addDonor1MouseExited
+    }//GEN-LAST:event_addAdminMouseExited
 
-    private void addDonor2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addDonor2MouseClicked
+    private void deleteAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteAdminMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_addDonor2MouseClicked
+         int row = AdminGrid.getSelectedRow();
+        if(row>-1)
+        {
+            if(Login.org.getAllAdmins().size() <= 1)
+            {
+                JOptionPane.showMessageDialog(this, "Cannot Delete.\nThe Organization must have atleast one Admin.");
+            }
+            else
+            {
+                String id = AdminGrid.getModel().getValueAt(row, 0).toString();
+                
+                System.out.println(id);
+                
+                boolean goToLogin = false;
+                if(id.equals(String.valueOf(Login.admin.getId())))
+                {
+                    goToLogin = true;
+                }
+                //iterate list of all admins to get the selected admin
+                for(int i=0; i<Login.org.getAllAdmins().size(); i++)
+                {
+                    if(Login.org.getAllAdmins().get(i).getId() == Integer.parseInt(id))
+                    {
+                        Login.org.getAllAdmins().remove(i);
+                        break;
+                    }
+                }
+                
+                if(goToLogin)
+                {
+                    LogoutMouseClicked(null);
+                }
+                this.dispose();
+                reloadPage();
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Please specify an Admin to delete");
+        }
+    }//GEN-LAST:event_deleteAdminMouseClicked
 
-    private void addDonor2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addDonor2MouseEntered
+    private void reloadPage()
+    {
+        String[] args = null;
+        main(args);        
+    }
+    private void deleteAdminMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteAdminMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_addDonor2MouseEntered
+    }//GEN-LAST:event_deleteAdminMouseEntered
 
-    private void addDonor2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addDonor2MouseExited
+    private void deleteAdminMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteAdminMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_addDonor2MouseExited
+    }//GEN-LAST:event_deleteAdminMouseExited
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+    private void LogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoutMouseClicked
         // TODO add your handling code here:
         PersistentDB db = new PersistentDB();
         try
@@ -578,7 +624,7 @@ public class ManageAdmin extends javax.swing.JFrame {
         log.setVisible(true);
         this.dispose();
 
-    }//GEN-LAST:event_jLabel2MouseClicked
+    }//GEN-LAST:event_LogoutMouseClicked
 
     /**
      * @param args the command line arguments
@@ -617,16 +663,16 @@ public class ManageAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable AdminGrid;
     private javax.swing.JLabel Home;
     private javax.swing.JLabel HomeBar;
+    private javax.swing.JLabel Logout;
     private javax.swing.JLabel ManageDonationBar;
     private javax.swing.JLabel ManageDonorsBar;
     private javax.swing.JLabel ManageProjectBar;
-    private javax.swing.JTable ProjectGrid;
-    private javax.swing.JLabel addDonor1;
-    private javax.swing.JLabel addDonor2;
+    private javax.swing.JLabel addAdmin;
     private javax.swing.JLabel back;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel deleteAdmin;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;

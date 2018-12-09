@@ -66,9 +66,9 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
-                          <Component id="addDonor1" min="-2" pref="125" max="-2" attributes="0"/>
+                          <Component id="addAdmin" min="-2" pref="125" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="133" max="-2" attributes="0"/>
-                          <Component id="addDonor2" min="-2" pref="125" max="-2" attributes="0"/>
+                          <Component id="deleteAdmin" min="-2" pref="125" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -93,8 +93,8 @@
                   </Group>
                   <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="addDonor2" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
-                      <Component id="addDonor1" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
+                      <Component id="deleteAdmin" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
+                      <Component id="addAdmin" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -132,7 +132,7 @@
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jLabel2" min="-2" pref="105" max="-2" attributes="0"/>
+                      <Component id="Logout" min="-2" pref="105" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -167,7 +167,7 @@
                           <Component id="manageDonors" alignment="0" min="-2" pref="45" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="149" max="32767" attributes="0"/>
-                      <Component id="jLabel2" min="-2" pref="44" max="-2" attributes="0"/>
+                      <Component id="Logout" min="-2" pref="44" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -380,7 +380,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel2">
+            <Component class="javax.swing.JLabel" name="Logout">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="3d" green="53" red="ff" type="rgb"/>
@@ -401,7 +401,7 @@
                 <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel2MouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="LogoutMouseClicked"/>
               </Events>
             </Component>
           </SubComponents>
@@ -434,7 +434,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="ProjectGrid">
+            <Component class="javax.swing.JTable" name="AdminGrid">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Century Gothic" size="12" style="0"/>
@@ -451,7 +451,7 @@
                 <Property name="selectionForeground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="26" green="16" red="f" type="rgb"/>
                 </Property>
-                <Property name="showVerticalLines" type="boolean" value="false" postCode="List&lt;Admin&gt; record = Login.org.getAllAdmins();&#xa;String [][] data = new String [record.size()][2];&#xa;&#xa;        int i = 0;&#xa;        for(Admin p: record )&#xa;        {&#xa;            data[i][0] = String.valueOf(p.getId());&#xa;            data[i][1] = p.getName();            &#xa;            i++;&#xa;         }&#xa;       &#xa;        &#xa;        ProjectGrid.setModel(new javax.swing.table.DefaultTableModel(&#xa;            data,&#xa;            new String [] {&#xa;                &quot;ADMIN ID&quot;, &quot;ADMIN NAME&quot;&#xa;            }&#xa;        ) {&#xa;            boolean[] canEdit = new boolean [] {&#xa;                false, false&#xa;            };&#xa;&#xa;            public boolean isCellEditable(int rowIndex, int columnIndex) {&#xa;                return canEdit [columnIndex];&#xa;            }&#xa;        });"/>
+                <Property name="showVerticalLines" type="boolean" value="false" postCode="List&lt;Admin&gt; record = Login.org.getAllAdmins();&#xa;String [][] data = new String [record.size()][2];&#xa;&#xa;        int i = 0;&#xa;        for(Admin p: record )&#xa;        {&#xa;            data[i][0] = String.valueOf(p.getId());&#xa;            data[i][1] = p.getName();            &#xa;            i++;&#xa;         }&#xa;       &#xa;        &#xa;        AdminGrid.setModel(new javax.swing.table.DefaultTableModel(&#xa;            data,&#xa;            new String [] {&#xa;                &quot;ADMIN ID&quot;, &quot;ADMIN NAME&quot;&#xa;            }&#xa;        ) {&#xa;            boolean[] canEdit = new boolean [] {&#xa;                false, false&#xa;            };&#xa;&#xa;            public boolean isCellEditable(int rowIndex, int columnIndex) {&#xa;                return canEdit [columnIndex];&#xa;            }&#xa;        });"/>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
@@ -459,7 +459,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="addDonor1">
+        <Component class="javax.swing.JLabel" name="addAdmin">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="26" green="16" red="f" type="rgb"/>
@@ -483,12 +483,12 @@
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addDonor1MouseClicked"/>
-            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addDonor1MouseExited"/>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addDonor1MouseEntered"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addAdminMouseClicked"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addAdminMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addAdminMouseExited"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="addDonor2">
+        <Component class="javax.swing.JLabel" name="deleteAdmin">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="26" green="16" red="f" type="rgb"/>
@@ -500,7 +500,7 @@
               <Color blue="c8" green="c8" red="c8" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Update Admin"/>
+            <Property name="text" type="java.lang.String" value="Delete Admin"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
                 <BevelBorder>
@@ -512,9 +512,9 @@
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addDonor2MouseClicked"/>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addDonor2MouseEntered"/>
-            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addDonor2MouseExited"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="deleteAdminMouseClicked"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="deleteAdminMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="deleteAdminMouseExited"/>
           </Events>
         </Component>
       </SubComponents>
