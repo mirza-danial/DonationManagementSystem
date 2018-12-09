@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package GUI;
-import Database.PersistentDB;
+import Model.PersistentDB;
 import Model.*;
 import java.awt.Toolkit;
 /**

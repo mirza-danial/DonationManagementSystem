@@ -5,7 +5,7 @@
  */
 package GUI;
 
-import Database.PersistentDB;
+import Model.PersistentDB;
 import java.awt.event.*;
 
 /**

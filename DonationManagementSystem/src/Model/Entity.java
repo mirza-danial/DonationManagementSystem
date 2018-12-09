@@ -1,7 +1,6 @@
 package Model;
 
 import java.util.*;
-import java.util.Objects;
 
 abstract class Entity {
     protected int id;
@@ -9,6 +8,21 @@ abstract class Entity {
     protected String description;
     protected Address addr;
     protected List<String> phoneNumbers;
+
+    void setId(int id) {
+        this.id = id;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    void setAddr(Address addr) {
+        this.addr = addr;
+    }
+
+    void setPhoneNumbers(List<String> phoneNumbers) {
+        this.phoneNumbers = phoneNumbers;
+    }
     
     public String toString(){
         String x = "ID: " + id + ", Name: " + name;

@@ -14,16 +14,23 @@ public class Admin extends Entity {
         password = pwd;
     }
 
-    public void addDonationToProject(Donation donation, int projID){
-        org.addDonation(donation);
+    public void addDonationToProject(Donation donation, int donorId, int projID){
+        Donor donor = getDonor(donorId);
+        addDonationToOrg(donation, donor);
+        
         Project pr = org.getProject(projID);
+        donation.setAssociatedProject(pr);
         pr.addDonation(donation);
     }
      public void assignDonationToProject(Donation donation, int projID){
         Project pr = org.getProject(projID);
+        donation.setAssociatedProject(pr);
         pr.addDonation(donation);
     }
     public boolean addDonationToOrg(Donation d, Donor donor){
+        d.setSourceDonor(donor);
+        if(!donor.getDonations().contains(d))
+            donor.addDonation(d);
         return org.addDonation(d);
     }
     

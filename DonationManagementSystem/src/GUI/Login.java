@@ -13,6 +13,11 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
@@ -28,40 +33,48 @@ public class Login extends javax.swing.JFrame {
     
     public static Organization org;
     public static Admin admin;
-    public Login() {
+    public static PersistentDB db;
+    public Login() throws SQLException, Exception {
         
         // Test values will be changed when database will be entered
        
-        org = new Organization(1, "FastCare", "Charity Org");
+//        org = new Organization(1, "FastCare", "Charity Org");
+        
+        // this code will be uncommented after loadDBS
+        // Get all organizations list from DB
+        List<Organization> allOrgs = new ArrayList<>();
+        db = new PersistentDB();
+        db.connect();
+        db.loadAllOrgsFromDB(allOrgs);
+        org = allOrgs.get(0);   //Use the first organization if only one
 
-        Admin a = org.createNewAdmin();
-        a.setName("Raphy");
-        a.setOrg(org);
-        a.setUserName("raphy_n");
-        a.setPassword("123");
+        if(org == null)
+        {
+            NoOrganizationFound o =new NoOrganizationFound();
+            o.setVisible(true);
+            this.dispose();
+        }
+        
+        //Load all components of selected Organization
+        db.setOrg(org);
+        db.loadFromDB();
+        
+        Admin a = org.getAllAdmins().get(0);
         
         Donor d = a.createNewDonor();
         d.setName("Danial");
         d.setAddr("Model Town", "Lahore", "Pakistan");
         d.addPhoneNum("090078601");
-        
+        a.addDonor(d);
         
         Project p = a.createNewProject();
         p.setName("TCF Schools");
         p.setAddr("Line 1", "Lahore", "Pakistan");
+        a.addProject(p);
         
-        // this code will be uncommented after loadDBS
-        
-//        if(org == null)
-//        {
-//            NoOrganizationFound o =new NoOrganizationFound();
-//            o.setVisible(true);
-//            this.dispose();
-//        }
         setTitle("Donation Management System");
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/donation.png")));
-        initComponents();
-            
+        initComponents();     
     }
 
     /**
@@ -258,7 +271,11 @@ public class Login extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                try {
+                    new Login().setVisible(true);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
         });
     }

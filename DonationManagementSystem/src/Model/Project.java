@@ -31,8 +31,6 @@ public class Project extends Entity {
     }
 
     public boolean addVolunteer(Volunteer v) throws Exception{
-        if(v.getAssignedProj() != null)
-            throw new Exception("Volunteer already assigned to Project: " + v.getAssignedProj());
         v.setAssignedProj(this);
         return volunteersInProject.add(v);
     }

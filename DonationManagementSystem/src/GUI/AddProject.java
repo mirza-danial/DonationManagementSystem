@@ -515,7 +515,7 @@ public class AddProject extends javax.swing.JFrame {
            Project p = Login.admin.createNewProject();
            
            p.setName(name);
-           p.setDescritpion(description);           
+           p.setDescription(description);           
            p.setAddr(location,city,country);
            
            System.out.println("Project added successfully");

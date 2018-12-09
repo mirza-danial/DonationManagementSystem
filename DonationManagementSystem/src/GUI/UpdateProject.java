@@ -568,7 +568,7 @@ public class UpdateProject extends javax.swing.JFrame {
             Project p = Login.org.getProject(projectID);
             
             p.setAddr(location, city, country);
-            p.setDescritpion(description);
+            p.setDescription(description);
             p.setName(name);
             ProjectDetails pd = new ProjectDetails(projectID);
             pd.setVisible(true);

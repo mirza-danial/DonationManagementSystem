@@ -7,7 +7,7 @@ import java.util.List;
 public class Organization extends Entity{
     
     private Date startDate;
-    private boolean isActive;
+    private boolean _isActive;
     
     private List<Project> allProjects;
     private List<Admin> allAdmins;
@@ -19,7 +19,7 @@ public class Organization extends Entity{
         super(id, name);
         super.setDescritpion(descr);
         startDate = new Date();
-        isActive = true;
+        _isActive = true;
         
         allProjects = new ArrayList<>();
         allAdmins = new ArrayList<>();
@@ -34,11 +34,11 @@ public class Organization extends Entity{
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
-    public boolean isIsActive() {
-        return isActive;
+    public boolean isActive() {
+        return _isActive;
     }
     public void setIsActive(boolean isActive) {
-        this.isActive = isActive;
+        this._isActive = isActive;
     }
     
     public String toString(){
@@ -52,11 +52,6 @@ public class Organization extends Entity{
         return x + "\n";
     }
     
-    public boolean addAdmin(String fullName, String userName, String password){
-        int id = allAdmins.size() + 1;
-        Admin newAdmin = new Admin(id, userName, fullName, password);
-        return allAdmins.add(newAdmin);
-    }
     public boolean removeAdmin(String userName, String pwd){
         for(Admin a: allAdmins){
             if(pwd.equals(a.getPassword()) && a.getUserName().equals(userName))
@@ -69,34 +64,42 @@ public class Organization extends Entity{
         int id = allAdmins.size() + 1;
         Admin a = new Admin(id, null, null, null);
         a.setOrg(this);
-        allAdmins.add(a);
+//        allAdmins.add(a);
         return a;
     }
     Project createNewProject() {
         int id = allProjects.size() + 1;
         Project p = new Project(id, null);
-        allProjects.add(p);
+//        allProjects.add(p);
         return p;
     }
     Donor createNewDonor() {
         int id = allDonors.size() + 1;
         Donor d= new Donor(id, null);
-        allDonors.add(d);
+//        allDonors.add(d);
         return d;
     }
     Donation createNewDonation() {
         int id = allDonations.size() + 1;
         Donation d = new Donation(id);
-        //allDonations.add(d);
+//        allDonations.add(d);
         return d;
     }
     Volunteer createNewVolunteer() {
         int id = allVolunteers.size() + 1;
         Volunteer v = new Volunteer(id, null);
-        allVolunteers.add(v);
+//        allVolunteers.add(v);
         return v;
     }
     
+    public boolean addAdmin(String fullName, String userName, String password){
+        int id = allAdmins.size() + 1;
+        Admin newAdmin = new Admin(id, userName, fullName, password);
+        return allAdmins.add(newAdmin);
+    }
+    public void addAdmin(Admin a) {
+        allAdmins.add(a);
+    }
     boolean addVolunteer(Volunteer v) {
         return addEntityToList(allVolunteers, v);
     }

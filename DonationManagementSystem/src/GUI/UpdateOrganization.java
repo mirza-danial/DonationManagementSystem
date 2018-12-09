@@ -526,7 +526,7 @@ public class UpdateOrganization extends javax.swing.JFrame {
     private void updateDetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateDetailsMouseClicked
         // TODO add your handling code here:
         Login.org.setName(organizationNameField.getText());
-        Login.org.setDescritpion(organizationDescriptionField.getText());
+        Login.org.setDescription(organizationDescriptionField.getText());
         /*
            Code to be modified
         */

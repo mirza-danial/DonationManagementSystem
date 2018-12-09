@@ -5,14 +5,18 @@ import java.util.Date;
 public class Donation  {
 
     private int id;
-
     private Donor sourceDonor;
     private Project associatedProject;
-
     private double value;
+    
     public PledgeInfo pledgeInfo;
     public PropertyInfo propertyInfo;
 
+    void setId(int id){ this.id = id;}
+
+    public void setAssociatedProject(Project associatedProject) {
+        this.associatedProject = associatedProject;
+    }
     public void setSourceDonor(Donor sourceDonor) {
         this.sourceDonor = sourceDonor;
     }

@@ -1,4 +1,4 @@
-package Testing;
+package TestingWithCmd;
 
 import Model.Address;
 import Model.Admin;

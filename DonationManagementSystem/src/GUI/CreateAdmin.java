@@ -4,9 +4,11 @@
  * and open the template in the editor.
  */
 package GUI;
-import Database.PersistentDB;
+import Model.PersistentDB;
 import Model.*;
 import java.awt.Toolkit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Danial
@@ -202,9 +204,14 @@ public class CreateAdmin extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         
-        Login ca =new Login();
-        ca.setVisible(true);
-        this.dispose();
+        Login ca = null;
+        try {
+            ca = new Login();
+            ca.setVisible(true);
+            this.dispose();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }//GEN-LAST:event_yesMouseClicked
 
     private void yesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_yesMouseEntered
