@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import Database.PersistentDB;
 import java.awt.Color;
 import java.util.*;
 import Model.*;
@@ -51,6 +52,7 @@ public class ManageAdmin extends javax.swing.JFrame {
         ManageDonorsBar = new javax.swing.JLabel();
         Home = new javax.swing.JLabel();
         HomeBar = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         back = new javax.swing.JLabel();
         message = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -202,6 +204,19 @@ public class ManageAdmin extends javax.swing.JFrame {
 
         HomeBar.setBackground(new java.awt.Color(255, 83, 62));
 
+        jLabel2.setBackground(new java.awt.Color(255, 83, 61));
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/exit.png"))); // NOI18N
+        jLabel2.setText("Logout");
+        jLabel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel2.setOpaque(true);
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -221,6 +236,10 @@ public class ManageAdmin extends javax.swing.JFrame {
                     .addComponent(manageProjects, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(manageDonations, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Home, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,7 +265,9 @@ public class ManageAdmin extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ManageDonorsBar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(manageDonors, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(233, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
         );
 
         back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/left-arrow (1).png"))); // NOI18N
@@ -390,7 +411,7 @@ public class ManageAdmin extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -535,6 +556,30 @@ public class ManageAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_addDonor2MouseExited
 
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        // TODO add your handling code here:
+        PersistentDB db = new PersistentDB();
+        try
+        {
+            db.setOrganizationAndAdmin(Login.org, Login.admin);
+            db.connect();
+            db.saveToDB();
+            db.disconnect();
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        System.out.println("Saving changes...");
+        Login.org = null;
+        Login.admin = null;
+
+        Login log = new Login();
+        log.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_jLabel2MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -581,6 +626,7 @@ public class ManageAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel addDonor1;
     private javax.swing.JLabel addDonor2;
     private javax.swing.JLabel back;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;

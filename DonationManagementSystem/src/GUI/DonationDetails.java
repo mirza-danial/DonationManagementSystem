@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package GUI;
+import Database.PersistentDB;
 import Model.*;
 import java.awt.Color;
 import java.awt.Toolkit;
@@ -66,6 +67,7 @@ public class DonationDetails extends javax.swing.JFrame {
         ManageDonorsBar = new javax.swing.JLabel();
         Home = new javax.swing.JLabel();
         HomeBar = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         back = new javax.swing.JLabel();
         message = new javax.swing.JLabel();
         projectNameLabel = new javax.swing.JLabel();
@@ -222,6 +224,19 @@ public class DonationDetails extends javax.swing.JFrame {
 
         HomeBar.setBackground(new java.awt.Color(255, 83, 62));
 
+        jLabel2.setBackground(new java.awt.Color(255, 83, 61));
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/exit.png"))); // NOI18N
+        jLabel2.setText("Logout");
+        jLabel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel2.setOpaque(true);
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -241,6 +256,10 @@ public class DonationDetails extends javax.swing.JFrame {
                     .addComponent(manageProjects, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(manageDonations, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Home, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,7 +285,9 @@ public class DonationDetails extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ManageDonorsBar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(manageDonors, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
         );
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 679));
@@ -474,6 +495,30 @@ public class DonationDetails extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_assignDonation1MouseExited
 
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        // TODO add your handling code here:
+        PersistentDB db = new PersistentDB();
+        try
+        {
+            db.setOrganizationAndAdmin(Login.org, Login.admin);
+            db.connect();
+            db.saveToDB();
+            db.disconnect();
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        System.out.println("Saving changes...");
+        Login.org = null;
+        Login.admin = null;
+
+        Login log = new Login();
+        log.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_jLabel2MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -522,6 +567,7 @@ public class DonationDetails extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;

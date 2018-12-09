@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import Database.PersistentDB;
 import java.awt.Color;
 import java.util.*;
 import Model.*;
@@ -78,6 +79,7 @@ public class AddDonation extends javax.swing.JFrame {
         ManageDonorsBar = new javax.swing.JLabel();
         Home = new javax.swing.JLabel();
         HomeBar = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         back = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         worthLabel = new javax.swing.JTextField();
@@ -236,6 +238,19 @@ public class AddDonation extends javax.swing.JFrame {
 
         HomeBar.setBackground(new java.awt.Color(255, 83, 62));
 
+        jLabel7.setBackground(new java.awt.Color(255, 83, 61));
+        jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/exit.png"))); // NOI18N
+        jLabel7.setText("Logout");
+        jLabel7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel7.setOpaque(true);
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -255,6 +270,10 @@ public class AddDonation extends javax.swing.JFrame {
                     .addComponent(manageProjects, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(manageDonations, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Home, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,7 +299,9 @@ public class AddDonation extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ManageDonorsBar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(manageDonors, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(233, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
         );
 
         back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/left-arrow (1).png"))); // NOI18N
@@ -454,7 +475,7 @@ public class AddDonation extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addComponent(confirmDonation, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -674,6 +695,29 @@ public class AddDonation extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_backMouseClicked
 
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        // TODO add your handling code here:
+        PersistentDB db = new PersistentDB();
+        try
+        {
+            db.setOrganizationAndAdmin(Login.org, Login.admin);
+            db.connect();
+            db.saveToDB();
+            db.disconnect();
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        System.out.println("Saving changes...");
+        Login.org = null;
+        Login.admin = null;
+
+        Login log = new Login();
+        log.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel7MouseClicked
+
     public PageFormat getPageFormat(PrinterJob pj)
     {
 
@@ -834,6 +878,7 @@ public class AddDonation extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;

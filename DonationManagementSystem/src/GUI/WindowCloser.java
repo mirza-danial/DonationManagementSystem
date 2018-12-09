@@ -30,5 +30,6 @@ public class WindowCloser extends WindowAdapter {
             ex.printStackTrace();
         }
         System.out.println("Window closed");
+        System.exit(0);
     }
 }
