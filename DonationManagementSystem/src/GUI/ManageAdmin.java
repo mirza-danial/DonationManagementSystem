@@ -579,8 +579,10 @@ public class ManageAdmin extends javax.swing.JFrame {
                 {
                     LogoutMouseClicked(null);
                 }
+                ManageAdmin ma = new ManageAdmin();
+                ma.setVisible(true);
                 this.dispose();
-                reloadPage();
+                //reloadPage();
             }
         }
         else
@@ -591,8 +593,9 @@ public class ManageAdmin extends javax.swing.JFrame {
 
     private void reloadPage()
     {
-        String[] args = null;
-        main(args);        
+        //String[] args = null;
+        //main(args);     
+        
     }
     private void deleteAdminMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteAdminMouseEntered
         // TODO add your handling code here:

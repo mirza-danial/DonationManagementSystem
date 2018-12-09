@@ -95,15 +95,7 @@ public class Organization extends Entity{
         //int id = allAdmins.size() + 1;
         /*Changes introduced by Danial*/
         //********************************//
-        int maxID = -1;
-        for(Admin a: allAdmins)
-        {
-            if(a.getId() > maxID)
-            {
-                maxID = a.getId();
-            }
-        }
-        int id = maxID + 1; 
+        id = assignID("admin");
         //********************************//
         
         Admin a = new Admin(id, null, null, null);
@@ -112,25 +104,25 @@ public class Organization extends Entity{
         return a;
     }
     Project createNewProject() {
-        int id = allProjects.size() + 1;
+        int id =assignID("project"); //allProjects.size() + 1;
         Project p = new Project(id, null);
         allProjects.add(p);
         return p;
     }
     Donor createNewDonor() {
-        int id = allDonors.size() + 1;
+        int id = assignID("donor");//allDonors.size() + 1;
         Donor d= new Donor(id, null);
         allDonors.add(d);
         return d;
     }
     Donation createNewDonation() {
-        int id = allDonations.size() + 1;
+        int id = assignID("donation");//allDonations.size() + 1;
         Donation d = new Donation(id);
         //allDonations.add(d);
         return d;
     }
     Volunteer createNewVolunteer() {
-        int id = allVolunteers.size() + 1;
+        int id = assignID("volunteer");//allVolunteers.size() + 1;
         Volunteer v = new Volunteer(id, null);
         allVolunteers.add(v);
         return v;
@@ -242,5 +234,66 @@ public class Organization extends Entity{
     public List<Admin> getAllAdmins()
     {
         return allAdmins;
+    }
+    
+    private int assignID(String value)            
+    {
+        int max_id = -1;
+        switch(value)
+        {
+            case "donation":
+                
+                for(Donation d : allDonations)
+                {
+                    if(d.getId() - 400 > max_id)
+                    {
+                        max_id = d.getId() - 400;
+                    }
+                }  
+                break;
+            case "admin":
+                for(Admin a : allAdmins)
+                {
+                    if(a.getId() > max_id)
+                    {
+                        max_id = a.getId();
+                    }
+                }  
+                break;
+                
+            case "donor":
+                for(Donor d : allDonors)
+                {
+                    if(d.getId() - 300 > max_id)
+                    {
+                        max_id = d.getId() - 300;
+                    }
+                }  
+                break;
+            case "project":
+                for(Project  p: allProjects)
+                {
+                    if(p.getId() - 200 > max_id)
+                    {
+                        max_id = p.getId() - 200;
+                    }
+                }  
+                break;
+            case "volunteer":
+                for(Volunteer  v: allVolunteers)
+                {
+                    if(v.getId() - 100 > max_id)
+                    {
+                        max_id = v.getId() -100;
+                    }
+                }  
+                break;    
+            default:
+                
+                break;
+                
+        }
+          
+        return max_id + 1;  
     }
 }
