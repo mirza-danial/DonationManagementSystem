@@ -13,6 +13,12 @@ public class Donation  {
     public PledgeInfo pledgeInfo;
     public PropertyInfo propertyInfo;
 
+    void setId(int id) {
+        this.id = id;
+    }
+    public void setAssociatedProject(Project associatedProject) {
+        this.associatedProject = associatedProject;
+    }   
     public void setSourceDonor(Donor sourceDonor) {
         this.sourceDonor = sourceDonor;
     }
@@ -31,7 +37,13 @@ public class Donation  {
     public Donor getSourceDonor() {
         return sourceDonor;
     }
-
+    public PledgeInfo getPledgeInfo() {
+        return pledgeInfo;
+    }
+    public PropertyInfo getPropertyInfo() {
+        return propertyInfo;
+    }
+    
     Donation(int id) {
         this.id = 400 + id;
     }
@@ -64,7 +76,7 @@ public class Donation  {
     }
 
     public void removeProject() {
-        associatedProject.removeDonation(this);
+        //associatedProject.removeDonation(this);
         associatedProject = null;
     }
 

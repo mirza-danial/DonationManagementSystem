@@ -5,7 +5,7 @@
  */
 package GUI;
 
-import Database.PersistentDB;
+import Model.PersistentDB;
 import java.awt.Color;
 import java.util.*;
 import Model.*;
@@ -23,6 +23,9 @@ import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Danial
@@ -34,19 +37,19 @@ public class AddDonation extends javax.swing.JFrame {
      */
     int donorID;
     boolean donate2Project;
-    public AddDonation(int ID)
-    {
+
+    public AddDonation(int ID) {
         this();
         donorID = ID;
         donate2Project = false;
-        
+
     }
-    
+
     public AddDonation() {
         setTitle("Donation Management System");
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/donation.png")));
         initComponents();
-        
+
         nameLabel.setText(Login.admin.getName());
 
         //add window closing listener
@@ -508,7 +511,7 @@ public class AddDonation extends javax.swing.JFrame {
 
     private void manageOrganizationMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseEntered
         // TODO add your handling code here:
-        Color highlight = new Color(255,83,61);
+        Color highlight = new Color(255, 83, 61);
         manageOrganization.setForeground(highlight);
         manageOrganizationBar.setOpaque(true);
         manageOrganizationBar.repaint();
@@ -516,7 +519,7 @@ public class AddDonation extends javax.swing.JFrame {
 
     private void manageOrganizationMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseExited
         // TODO add your handling code here:
-        Color dullGray = new Color(200,200,200);
+        Color dullGray = new Color(200, 200, 200);
         manageOrganizationBar.setOpaque(false);
         manageOrganizationBar.repaint();
         manageOrganization.setForeground(dullGray);
@@ -583,21 +586,21 @@ public class AddDonation extends javax.swing.JFrame {
     private void manageProjectsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageProjectsMouseClicked
         // TODO add your handling code here:
         ManageProjects mp = new ManageProjects();
-        mp.setVisible(true);        
+        mp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_manageProjectsMouseClicked
 
     private void manageDonationsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageDonationsMouseClicked
         // TODO add your handling code here:
         ManageDonations md = new ManageDonations();
-        md.setVisible(true);        
+        md.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_manageDonationsMouseClicked
 
     private void manageDonorsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageDonorsMouseClicked
         // TODO add your handling code here:
         ManageDonors md = new ManageDonors();
-        md.setVisible(true);        
+        md.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_manageDonorsMouseClicked
 
@@ -609,70 +612,58 @@ public class AddDonation extends javax.swing.JFrame {
     private void confirmDonationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmDonationMouseClicked
         // TODO add your handling code here:
         Donor donor = Login.org.getDonor(donorID);
-        if(!worthLabel.getText().isEmpty())
-        {
-            if(donate2Project)
-            {
-                
-                try
-                {
+        if (!worthLabel.getText().isEmpty()) {
+            if (donate2Project) {
+
+                try {
                     Integer row = ProjectGrid.getSelectedRow();
                     String value = ProjectGrid.getModel().getValueAt(row, 0).toString();
-                    
+
                     Project p = Login.org.getProject(Integer.valueOf(value));
-                    
+
                     Donation donation = Login.admin.createNewDonation();
                     donation.setValue(Double.valueOf(worthLabel.getText()));
                     donation.setSourceDonor(donor);
                     donation.assignToProject(p);
-                    PrinterJob pj = PrinterJob.getPrinterJob();        
-                    pj.setPrintable(new BillPrintable(),getPageFormat(pj));
+                    PrinterJob pj = PrinterJob.getPrinterJob();
+                    pj.setPrintable(new BillPrintable(), getPageFormat(pj));
                     try {
-                         pj.print();
-          
-                    }
-                    catch (PrinterException ex) {
+                        pj.print();
+
+                    } catch (PrinterException ex) {
                         ex.printStackTrace();
                     }
 
-                    
-                    Login.admin.addDonationToProject(donation, Integer.valueOf(value));
+                    Login.admin.addDonationToProject(donation, donorID, Integer.valueOf(value));
                     DonorDetails dd = new DonorDetails(donorID);
                     dd.setVisible(true);
                     this.dispose();
-                }
-                catch(Exception e)
-                {
+                } catch (Exception e) {
                     message.setText("No project is specified!");
                 }
 
-            }
-            else
-            {
+            } else {
                 Donation donation = Login.admin.createNewDonation();
                 donation.setValue(Double.valueOf(worthLabel.getText()));
                 donation.setSourceDonor(donor);
 
                 Login.admin.addDonationToOrg(donation, donor);
-                PrinterJob pj = PrinterJob.getPrinterJob();        
-                pj.setPrintable(new BillPrintable(),getPageFormat(pj));
+                PrinterJob pj = PrinterJob.getPrinterJob();
+                pj.setPrintable(new BillPrintable(), getPageFormat(pj));
                 try {
-                     pj.print();
-                }
-                catch (PrinterException ex) {
+                    pj.print();
+                } catch (PrinterException ex) {
                     ex.printStackTrace();
                 }
                 DonorDetails dd = new DonorDetails(donorID);
                 dd.setVisible(true);
                 this.dispose();
             }
-            
-        }
-        else
-        {
+
+        } else {
             message.setText("Some important fields are empty!");
         }
-        
+
     }//GEN-LAST:event_confirmDonationMouseClicked
 
     private void confirmDonationMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmDonationMouseEntered
@@ -698,136 +689,140 @@ public class AddDonation extends javax.swing.JFrame {
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         // TODO add your handling code here:
         PersistentDB db = new PersistentDB();
-        try
-        {
+        try {
             db.setOrganizationAndAdmin(Login.org, Login.admin);
             db.connect();
             db.saveToDB();
             db.disconnect();
-        }
-        catch(Exception ex)
-        {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         System.out.println("Saving changes...");
         Login.org = null;
         Login.admin = null;
 
-        Login log = new Login();
-        log.setVisible(true);
-        this.dispose();
+        Login log;
+        try {
+            log = new Login();
+            log.setVisible(true);
+            this.dispose();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        
     }//GEN-LAST:event_jLabel7MouseClicked
 
-    public PageFormat getPageFormat(PrinterJob pj)
-    {
+    public PageFormat getPageFormat(PrinterJob pj) {
 
         PageFormat pf = pj.defaultPage();
-        Paper paper = pf.getPaper();    
+        Paper paper = pf.getPaper();
 
-        double middleHeight =8.0;  
-        double headerHeight = 2.0;                  
-        double footerHeight = 2.0;                  
+        double middleHeight = 8.0;
+        double headerHeight = 2.0;
+        double footerHeight = 2.0;
         double width = convert_CM_To_PPI(8);      //printer know only point per inch.default value is 72ppi
-        double height = convert_CM_To_PPI(headerHeight+middleHeight+footerHeight); 
+        double height = convert_CM_To_PPI(headerHeight + middleHeight + footerHeight);
         paper.setSize(width, height);
-        paper.setImageableArea(                    
-            0,
-            10,
-            width,            
-            height - convert_CM_To_PPI(1)
+        paper.setImageableArea(
+                0,
+                10,
+                width,
+                height - convert_CM_To_PPI(1)
         );   //define boarder size    after that print area width is about 180 points
 
         pf.setOrientation(PageFormat.PORTRAIT);           //select orientation portrait or landscape but for this time portrait
-        pf.setPaper(paper);    
+        pf.setPaper(paper);
 
         return pf;
     }
-    
-    protected static double convert_CM_To_PPI(double cm) {            
-    	        return toPPI(cm * 0.393600787);            
-    }
- 
-    protected static double toPPI(double inch) {            
-	        return inch * 72d;            
+
+    protected static double convert_CM_To_PPI(double cm) {
+        return toPPI(cm * 0.393600787);
     }
 
+    protected static double toPPI(double inch) {
+        return inch * 72d;
+    }
 
+    public class BillPrintable implements Printable {
 
+        public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
+            int result = NO_SUCH_PAGE;
+            if (pageIndex == 0) {
 
+                Graphics2D g2d = (Graphics2D) graphics;
 
+                double width = pageFormat.getImageableWidth();
 
-    public class BillPrintable implements Printable
-    {
+                g2d.translate((int) pageFormat.getImageableX(), (int) pageFormat.getImageableY());
 
-      public int print(Graphics graphics, PageFormat pageFormat,int pageIndex) throws PrinterException 
-      {    
-          int result = NO_SUCH_PAGE;    
-            if (pageIndex == 0) {                    
+                FontMetrics metrics = g2d.getFontMetrics(new Font("Arial", Font.BOLD, 7));
+                int idLength = metrics.stringWidth("000");
+                int amtLength = metrics.stringWidth("000000");
+                int qtyLength = metrics.stringWidth("00000");
+                int priceLength = metrics.stringWidth("000000");
+                int prodLength = (int) width - idLength - amtLength - qtyLength - priceLength - 17;
 
-                Graphics2D g2d = (Graphics2D) graphics;                    
-
-                double width = pageFormat.getImageableWidth();                    
-
-                g2d.translate((int) pageFormat.getImageableX(),(int) pageFormat.getImageableY()); 
-
-           
-                FontMetrics metrics=g2d.getFontMetrics(new Font("Arial",Font.BOLD,7));
-                int idLength=metrics.stringWidth("000");
-                int amtLength=metrics.stringWidth("000000");
-                int qtyLength=metrics.stringWidth("00000");
-                int priceLength=metrics.stringWidth("000000");
-                int prodLength=(int)width - idLength - amtLength - qtyLength - priceLength-17;
-
-          
                 int productPosition = 0;
-                int discountPosition= prodLength+5;
-                int pricePosition = discountPosition +idLength+10;
-                int qtyPosition=pricePosition + priceLength + 4;
-                int amtPosition=qtyPosition + qtyLength;
-            try{
-                /*Draw Header*/
-                int y=20;
-                int yShift = 10;
-                int headerRectHeight=15;
-                int headerRectHeighta=40;
+                int discountPosition = prodLength + 5;
+                int pricePosition = discountPosition + idLength + 10;
+                int qtyPosition = pricePosition + priceLength + 4;
+                int amtPosition = qtyPosition + qtyLength;
+                try {
+                    /*Draw Header*/
+                    int y = 20;
+                    int yShift = 10;
+                    int headerRectHeight = 15;
+                    int headerRectHeighta = 40;
 
-                String  pp1a=worthLabel.getText();
-                String date =new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Timestamp(System.currentTimeMillis()));
-                String donor = Login.org.getDonor(donorID).getName();
-                String organization = Login.org.getName();
+                    String pp1a = worthLabel.getText();
+                    String date = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Timestamp(System.currentTimeMillis()));
+                    String donor = Login.org.getDonor(donorID).getName();
+                    String organization = Login.org.getName();
 
-                
-                g2d.setFont(new Font("Monospaced",Font.PLAIN,9));
-                g2d.drawString("-------------------------------------",12,y);y+=yShift;
-                g2d.drawString("         Donation Receipt            ",12,y);y+=yShift;
-                g2d.drawString("-------------------------------------",12,y);y+=headerRectHeight;
+                    g2d.setFont(new Font("Monospaced", Font.PLAIN, 9));
+                    g2d.drawString("-------------------------------------", 12, y);
+                    y += yShift;
+                    g2d.drawString("         Donation Receipt            ", 12, y);
+                    y += yShift;
+                    g2d.drawString("-------------------------------------", 12, y);
+                    y += headerRectHeight;
 
-                g2d.drawString("-------------------------------------",10,y);y+=yShift;
-                g2d.drawString(" Donation                   Amount   ",10,y);y+=yShift;
-                g2d.drawString("-------------------------------------",10,y);y+=headerRectHeight;
-                g2d.drawString("   1                       "+pp1a+"  ",10,y);y+=yShift;
-                g2d.drawString("-------------------------------------",10,y);y+=yShift;
-                g2d.drawString(" Total amount: "+pp1a+"              ",10,y);y+=yShift;
-                g2d.drawString(" Donated by:"+donor+"                ",10,y);y+=yShift;
-                g2d.drawString(" Donated to:"+organization+"         ",10,y);y+=yShift;
-                g2d.drawString("-------------------------------------",10,y);y+=yShift;                
-                g2d.drawString("             "+date  +"             ",10,y);y+=yShift;
-                g2d.drawString("*************************************",10,y);y+=yShift;
-                g2d.drawString("              THANK YOU              ",10,y);y+=yShift;
-                g2d.drawString("*************************************",10,y);y+=yShift;
+                    g2d.drawString("-------------------------------------", 10, y);
+                    y += yShift;
+                    g2d.drawString(" Donation                   Amount   ", 10, y);
+                    y += yShift;
+                    g2d.drawString("-------------------------------------", 10, y);
+                    y += headerRectHeight;
+                    g2d.drawString("   1                       " + pp1a + "  ", 10, y);
+                    y += yShift;
+                    g2d.drawString("-------------------------------------", 10, y);
+                    y += yShift;
+                    g2d.drawString(" Total amount: " + pp1a + "              ", 10, y);
+                    y += yShift;
+                    g2d.drawString(" Donated by:" + donor + "                ", 10, y);
+                    y += yShift;
+                    g2d.drawString(" Donated to:" + organization + "         ", 10, y);
+                    y += yShift;
+                    g2d.drawString("-------------------------------------", 10, y);
+                    y += yShift;
+                    g2d.drawString("             " + date + "             ", 10, y);
+                    y += yShift;
+                    g2d.drawString("*************************************", 10, y);
+                    y += yShift;
+                    g2d.drawString("              THANK YOU              ", 10, y);
+                    y += yShift;
+                    g2d.drawString("*************************************", 10, y);
+                    y += yShift;
+                } catch (Exception r) {
+                    r.printStackTrace();
+                }
+                result = PAGE_EXISTS;
+            }
+            return result;
         }
-        catch(Exception r){
-        r.printStackTrace();
-        }
-                  result = PAGE_EXISTS;    
-              }    
-              return result;    
-          }
-    }                                              
-                                         
-                                         
+    }
 
-    
     /**
      * @param args the command line arguments
      */

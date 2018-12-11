@@ -4,9 +4,13 @@
  * and open the template in the editor.
  */
 package GUI;
-import Database.PersistentDB;
+
+import Model.PersistentDB;
 import java.awt.Color;
 import java.awt.Toolkit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author mirza
@@ -407,20 +411,17 @@ public class AddAdmin extends javax.swing.JFrame {
         String name = adminNameLabel.getText();
         String user = adminUsernameLabel.getText();
         String pass = adminPasswordLabel.getText();
-        
-        if(!(name.isEmpty() || user.isEmpty() || pass.isEmpty()))
-        {
+
+        if (!(name.isEmpty() || user.isEmpty() || pass.isEmpty())) {
             Login.org.addAdmin(name, user, pass);
-            
+
             ManageAdmin ma = new ManageAdmin();
             ma.setVisible(true);
             this.dispose();
-        }
-        else
-        {
+        } else {
             message.setText("Required fields are missing");
         }
-        
+
     }//GEN-LAST:event_addAdminButtonMouseClicked
 
     private void addAdminButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addAdminButtonMouseExited
@@ -465,7 +466,7 @@ public class AddAdmin extends javax.swing.JFrame {
 
     private void manageOrganizationMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseEntered
         // TODO add your handling code here:
-        Color highlight = new Color(255,83,61);
+        Color highlight = new Color(255, 83, 61);
         manageOrganization.setForeground(highlight);
         manageOrganizationBar.setOpaque(true);
         manageOrganizationBar.repaint();
@@ -473,7 +474,7 @@ public class AddAdmin extends javax.swing.JFrame {
 
     private void manageOrganizationMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseExited
         // TODO add your handling code here:
-        Color dullGray = new Color(200,200,200);
+        Color dullGray = new Color(200, 200, 200);
         manageOrganizationBar.setOpaque(false);
         manageOrganizationBar.repaint();
         manageOrganization.setForeground(dullGray);
@@ -554,25 +555,26 @@ public class AddAdmin extends javax.swing.JFrame {
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
         PersistentDB db = new PersistentDB();
-        try
-        {
+        try {
             db.setOrganizationAndAdmin(Login.org, Login.admin);
             db.connect();
             db.saveToDB();
             db.disconnect();
-        }
-        catch(Exception ex)
-        {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         System.out.println("Saving changes...");
         Login.org = null;
         Login.admin = null;
 
-        Login log = new Login();
-        log.setVisible(true);
-        this.dispose();
-
+        Login log;
+        try {
+            log = new Login();
+            log.setVisible(true);
+            this.dispose();
+        } catch (Exception ex) {
+            Logger.getLogger(AddAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jLabel5MouseClicked
 
     /**

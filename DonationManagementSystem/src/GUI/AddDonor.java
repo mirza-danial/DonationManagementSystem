@@ -4,11 +4,15 @@
  * and open the template in the editor.
  */
 package GUI;
-import Database.PersistentDB;
+
+import Model.PersistentDB;
 import java.awt.Color;
 import java.util.*;
 import Model.*;
 import java.awt.Toolkit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Danial
@@ -23,7 +27,7 @@ public class AddDonor extends javax.swing.JFrame {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/donation.png")));
         initComponents();
         nameLabel.setText(Login.admin.getName());
-        
+
         //add window closing listener
         this.addWindowListener(new WindowCloser());
     }
@@ -474,7 +478,7 @@ public class AddDonor extends javax.swing.JFrame {
 
     private void manageOrganizationMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseEntered
         // TODO add your handling code here:
-        Color highlight = new Color(255,83,61);
+        Color highlight = new Color(255, 83, 61);
         manageOrganization.setForeground(highlight);
         manageOrganizationBar.setOpaque(true);
         manageOrganizationBar.repaint();
@@ -482,7 +486,7 @@ public class AddDonor extends javax.swing.JFrame {
 
     private void manageOrganizationMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseExited
         // TODO add your handling code here:
-        Color dullGray = new Color(200,200,200);
+        Color dullGray = new Color(200, 200, 200);
         manageOrganizationBar.setOpaque(false);
         manageOrganizationBar.repaint();
         manageOrganization.setForeground(dullGray);
@@ -572,22 +576,20 @@ public class AddDonor extends javax.swing.JFrame {
         String city = donorCityLabel.getText();
         String country = donorCountryLabel.getText();
 
-        if(!name.isEmpty() && !phone.isEmpty() && !location.isEmpty() && !city.isEmpty() && !country.isEmpty() )
-        {
-          
-            
-            Donor d = Login.admin.createNewDonor();
+        if (!name.isEmpty() && !phone.isEmpty() && !location.isEmpty() && !city.isEmpty() && !country.isEmpty()) {
+
+            Donor d = Login.admin.createNewDonor();            
             d.setName(name);
-            d.setAddr(location,city,country);
+            d.setAddr(location, city, country);
             d.addPhoneNum(phone);
-            
+            Login.admin.addDonor(d);
+
             System.out.println("Donor added successfully");
             message.setForeground(Color.green);
             message.setText("Donor added!");
 
             backMouseClicked(null);
-        }
-        else{
+        } else {
             message.setText("Some required fields are empty");
         }
     }//GEN-LAST:event_addDonorMouseClicked
@@ -619,30 +621,27 @@ public class AddDonor extends javax.swing.JFrame {
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         // TODO add your handling code here:
         PersistentDB db = new PersistentDB();
-        try
-        {
+        try {
             db.setOrganizationAndAdmin(Login.org, Login.admin);
             db.connect();
             db.saveToDB();
             db.disconnect();
-        }
-        catch(Exception ex)
-        {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         System.out.println("Saving changes...");
         Login.org = null;
         Login.admin = null;
 
-        Login log = new Login();
-        log.setVisible(true);
-        this.dispose();
-
+        Login log;
+        try {
+            log = new Login();
+            log.setVisible(true);
+            this.dispose();
+        } catch (Exception ex) {
+            Logger.getLogger(AddDonor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jLabel6MouseClicked
-
-                                                 
-                                        
-
 
     /**
      * @param args the command line arguments

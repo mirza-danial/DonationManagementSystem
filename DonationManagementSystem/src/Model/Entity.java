@@ -29,6 +29,7 @@ abstract class Entity {
         this.name = name;
     }
         
+    void setId(int id){this.id = id;}
     public void setName(String name) {
         this.name = name;
     }
@@ -38,6 +39,7 @@ abstract class Entity {
     public void setAddr(String firstLine, String city, String country) {
         addr = new Address(firstLine, city, country);
     }
+    void setPhoneNumbers(List<String> phonesList){phoneNumbers = phonesList;}
     public boolean addPhoneNum(String number){
         return phoneNumbers.add(number);
     }

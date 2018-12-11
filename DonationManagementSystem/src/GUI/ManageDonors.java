@@ -5,11 +5,13 @@
  */
 package GUI;
 
-import Database.PersistentDB;
+import Model.PersistentDB;
 import java.awt.Color;
 import java.util.*;
 import Model.*;
 import java.awt.Toolkit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Danial
@@ -507,10 +509,14 @@ public class ManageDonors extends javax.swing.JFrame {
         Login.org = null;
         Login.admin = null;
 
-        Login log = new Login();
-        log.setVisible(true);
-        this.dispose();
-
+        Login log;
+        try {
+            log = new Login();
+            log.setVisible(true);
+            this.dispose();
+        } catch (Exception ex) {
+            Logger.getLogger(AddProject.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jLabel2MouseClicked
                             
 

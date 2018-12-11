@@ -4,11 +4,13 @@
  * and open the template in the editor.
  */
 package GUI;
-import Database.PersistentDB;
+import Model.PersistentDB;
 import Model.*;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Danial
@@ -723,9 +725,14 @@ public class UpdateDonation extends javax.swing.JFrame {
         Login.org = null;
         Login.admin = null;
 
-        Login log = new Login();
-        log.setVisible(true);
-        this.dispose();
+        Login log;
+        try {
+            log = new Login();
+            log.setVisible(true);
+            this.dispose();
+        } catch (Exception ex) {
+            Logger.getLogger(AddProject.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_jLabel11MouseClicked
 

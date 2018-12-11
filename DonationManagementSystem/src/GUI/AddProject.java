@@ -5,10 +5,12 @@
  */
 package GUI;
 
-import Database.PersistentDB;
+import Model.PersistentDB;
 import java.awt.Color;
 import Model.*;
 import java.awt.Toolkit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,7 +26,7 @@ public class AddProject extends javax.swing.JFrame {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/donation.png")));
         initComponents();
         nameLabel.setText(Login.admin.getName());
-        
+
         //add window closing listener
         this.addWindowListener(new WindowCloser());
     }
@@ -461,7 +463,7 @@ public class AddProject extends javax.swing.JFrame {
 
     private void manageOrganizationMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseEntered
         // TODO add your handling code here:
-        Color highlight = new Color(255,83,61);
+        Color highlight = new Color(255, 83, 61);
         manageOrganization.setForeground(highlight);
         manageOrganizationBar.setOpaque(true);
         manageOrganizationBar.repaint();
@@ -469,7 +471,7 @@ public class AddProject extends javax.swing.JFrame {
 
     private void manageOrganizationMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseExited
         // TODO add your handling code here:
-        Color dullGray = new Color(200,200,200);
+        Color dullGray = new Color(200, 200, 200);
         manageOrganizationBar.setOpaque(false);
         manageOrganizationBar.repaint();
         manageOrganization.setForeground(dullGray);
@@ -525,29 +527,28 @@ public class AddProject extends javax.swing.JFrame {
 
     private void addProjectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProjectMouseClicked
         // TODO add your handling code here:
-       String name = projectnameLabel.getText();
-       String description = projectDescriptionArea.getText();
-       String location = projectLocationLabel.getText();
-       String city = projectCityLabel.getText();
-       String country = projectCountryLabel.getText();
-       
-       if(!name.isEmpty() && !description.isEmpty())
-       {
-           Project p = Login.admin.createNewProject();
-           
-           p.setName(name);
-           p.setDescritpion(description);           
-           p.setAddr(location,city,country);
-           
-           System.out.println("Project added successfully");
-           message.setForeground(Color.green);
-           message.setText("Project added!");
-           
-           backMouseClicked(null);
-       }
-       else{
-           message.setText("Some required fields are empty");
-       }
+        String name = projectnameLabel.getText();
+        String description = projectDescriptionArea.getText();
+        String location = projectLocationLabel.getText();
+        String city = projectCityLabel.getText();
+        String country = projectCountryLabel.getText();
+
+        if (!name.isEmpty() && !description.isEmpty()) {
+            Project p = Login.admin.createNewProject();
+
+            p.setName(name);
+            p.setDescritpion(description);
+            p.setAddr(location, city, country);
+            
+            Login.admin.addProject(p);
+            System.out.println("Project added successfully");
+            message.setForeground(Color.green);
+            message.setText("Project added!");
+
+            backMouseClicked(null);
+        } else {
+            message.setText("Some required fields are empty");
+        }
     }//GEN-LAST:event_addProjectMouseClicked
 
     private void addProjectMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProjectMouseEntered
@@ -570,8 +571,7 @@ public class AddProject extends javax.swing.JFrame {
     private void projectCountryLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_projectCountryLabelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_projectCountryLabelActionPerformed
-                                                
-                                            
+
 
     private void backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseClicked
         // TODO add your handling code here:
@@ -582,7 +582,7 @@ public class AddProject extends javax.swing.JFrame {
         // TODO add your handling code here:
         Dashboard md = new Dashboard();
         md.setVisible(true);
-        
+
         this.dispose();
     }//GEN-LAST:event_HomeMouseClicked
 
@@ -595,9 +595,9 @@ public class AddProject extends javax.swing.JFrame {
 
     private void manageProjectsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageProjectsMouseClicked
         // TODO add your handling code here:
-         ManageProjects mp = new ManageProjects();
+        ManageProjects mp = new ManageProjects();
         mp.setVisible(true);
-        
+
         this.dispose();
     }//GEN-LAST:event_manageProjectsMouseClicked
 
@@ -611,32 +611,33 @@ public class AddProject extends javax.swing.JFrame {
     private void manageDonorsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageDonorsMouseClicked
         // TODO add your handling code here:
         ManageDonors md = new ManageDonors();
-        md.setVisible(true);        
+        md.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_manageDonorsMouseClicked
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         // TODO add your handling code here:
         PersistentDB db = new PersistentDB();
-        try
-        {
+        try {
             db.setOrganizationAndAdmin(Login.org, Login.admin);
             db.connect();
             db.saveToDB();
             db.disconnect();
-        }
-        catch(Exception ex)
-        {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         System.out.println("Saving changes...");
         Login.org = null;
         Login.admin = null;
 
-        Login log = new Login();
-        log.setVisible(true);
-        this.dispose();
-
+        Login log;
+        try {
+            log = new Login();
+            log.setVisible(true);
+            this.dispose();
+        } catch (Exception ex) {
+            Logger.getLogger(AddProject.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jLabel6MouseClicked
 
     /**

@@ -4,9 +4,13 @@
  * and open the template in the editor.
  */
 package GUI;
-import Database.PersistentDB;
+
+import Model.PersistentDB;
 import Model.*;
 import java.awt.Toolkit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Danial
@@ -17,11 +21,12 @@ public class CreateAdmin extends javax.swing.JFrame {
      * Creates new form CreateAdmin
      */
     private Organization organization;
-    public CreateAdmin(Organization org)
-    {
+
+    public CreateAdmin(Organization org) {
         this();
         organization = org;
     }
+
     public CreateAdmin() {
         setTitle("Donation Management System");
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/donation.png")));
@@ -42,11 +47,12 @@ public class CreateAdmin extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         yes = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        message = new javax.swing.JLabel();
         name = new javax.swing.JTextField();
         uName = new javax.swing.JTextField();
         pass = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,8 +86,9 @@ public class CreateAdmin extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel4.setText("User name");
 
-        jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jLabel6.setText("Password");
+        message.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        message.setForeground(new java.awt.Color(255, 0, 0));
+        message.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         name.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         name.addActionListener(new java.awt.event.ActionListener() {
@@ -107,6 +114,9 @@ public class CreateAdmin extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel5.setText("Let's add an admin to access the system!");
 
+        jLabel7.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jLabel7.setText("Password");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -116,7 +126,6 @@ public class CreateAdmin extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(177, 177, 177)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
                             .addComponent(jLabel4)
                             .addComponent(jLabel2))
                         .addGap(80, 80, 80)
@@ -137,6 +146,15 @@ public class CreateAdmin extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(yes, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(297, 297, 297))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(212, 212, 212)
+                .addComponent(message, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(187, 187, 187)
+                    .addComponent(jLabel7)
+                    .addContainerGap(491, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,13 +171,18 @@ public class CreateAdmin extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(uName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addGap(30, 30, 30)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
+                .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63)
+                .addComponent(message)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
                 .addComponent(yes, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(310, Short.MAX_VALUE)
+                    .addComponent(jLabel7)
+                    .addGap(256, 256, 256)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -183,28 +206,38 @@ public class CreateAdmin extends javax.swing.JFrame {
         String n = name.getText();
         String userName = uName.getText();
         String password = pass.getText();
-        
-        Admin a = organization.createNewAdmin();
-        a.setName(n);
-        a.setUserName(userName);
-        a.setPassword(password);
-        
-        PersistentDB db = new PersistentDB();
-        try 
+        message.setText("");
+        if(n.isEmpty() || userName.isEmpty() || password.isEmpty())
         {
-            db.setOrganizationAndAdmin(organization, a);
-            db.connect();
-            db.saveToDB();
-            db.disconnect();
+            message.setText("Some important fields are empty !");
         }
-        catch(Exception ex)
-        {
-            ex.printStackTrace();
+        else{
+            Admin a = organization.createNewAdmin();
+            a.setName(n);
+            a.setUserName(userName);
+            a.setPassword(password);
+
+            organization.addAdmin(n, userName, password);
+
+            PersistentDB db = new PersistentDB();
+            try {
+                db.setOrganizationAndAdmin(organization, a);
+                db.connect();
+                db.saveToDB();
+                db.disconnect();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+            Login ca;
+            try {
+                ca = new Login();
+                ca.setVisible(true);
+                this.dispose();
+            } catch (Exception ex) {
+                Logger.getLogger(CreateAdmin.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        
-        Login ca =new Login();
-        ca.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_yesMouseClicked
 
     private void yesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_yesMouseEntered
@@ -271,8 +304,9 @@ public class CreateAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel message;
     private javax.swing.JTextField name;
     private javax.swing.JTextField pass;
     private javax.swing.JTextField uName;

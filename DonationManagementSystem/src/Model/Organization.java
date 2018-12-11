@@ -7,7 +7,7 @@ import java.util.List;
 public class Organization extends Entity{
     
     private Date startDate;
-    private boolean isActive;
+    private boolean _isActive;
     
     private List<Project> allProjects;
     private List<Admin> allAdmins;
@@ -22,7 +22,7 @@ public class Organization extends Entity{
         super(id, name);
         super.setDescritpion(descr);
         startDate = new Date();
-        isActive = true;
+        _isActive = true;
         
         allProjects = new ArrayList<>();
         allAdmins = new ArrayList<>();
@@ -37,11 +37,11 @@ public class Organization extends Entity{
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
-    public boolean isIsActive() {
-        return isActive;
+    public boolean isActive() {
+        return _isActive;
     }
     public void setIsActive(boolean isActive) {
-        this.isActive = isActive;
+        this._isActive = isActive;
     }
     
     public String toString(){
@@ -81,6 +81,7 @@ public class Organization extends Entity{
         //********************************//
         
         Admin newAdmin = new Admin(id, userName, fullName, password);
+        newAdmin.setOrg(this);
         return allAdmins.add(newAdmin);
     }
     public boolean removeAdmin(String userName, String pwd){
@@ -95,24 +96,24 @@ public class Organization extends Entity{
         //int id = allAdmins.size() + 1;
         /*Changes introduced by Danial*/
         //********************************//
-        id = assignID("admin");
+        int id = assignID("admin");
         //********************************//
         
         Admin a = new Admin(id, null, null, null);
         a.setOrg(this);
-        allAdmins.add(a);
+//        allAdmins.add(a);
         return a;
     }
     Project createNewProject() {
         int id =assignID("project"); //allProjects.size() + 1;
         Project p = new Project(id, null);
-        allProjects.add(p);
+//        allProjects.add(p);
         return p;
     }
     Donor createNewDonor() {
         int id = assignID("donor");//allDonors.size() + 1;
         Donor d= new Donor(id, null);
-        allDonors.add(d);
+//        allDonors.add(d);
         return d;
     }
     Donation createNewDonation() {
@@ -124,10 +125,11 @@ public class Organization extends Entity{
     Volunteer createNewVolunteer() {
         int id = assignID("volunteer");//allVolunteers.size() + 1;
         Volunteer v = new Volunteer(id, null);
-        allVolunteers.add(v);
+//        allVolunteers.add(v);
         return v;
     }
     
+    boolean addAdmin(Admin a){return allAdmins.add(a);}
     boolean addVolunteer(Volunteer v) {
         return addEntityToList(allVolunteers, v);
     }
@@ -145,6 +147,13 @@ public class Organization extends Entity{
         return allVolunteers.remove(v);
     }
     boolean removeProject(Project p) {
+        for (Donation d : allDonations)
+        {
+            if(d.getAssociatedProject() == p)
+            {
+                d.removeProject();
+            }
+        }
         return allProjects.remove(p);
     }
     boolean removeDonor(Donor d) {
@@ -211,7 +220,7 @@ public class Organization extends Entity{
         return null;
     }
     private boolean addEntityToList(List list, Entity e){
-        int id = list.size() + 1;
+//        int id = list.size() + 1;
         return list.add(e);
     }
     private <E> boolean updateInList(List<E> list, E entity){
@@ -238,7 +247,7 @@ public class Organization extends Entity{
     
     private int assignID(String value)            
     {
-        int max_id = -1;
+        int max_id = 0; // Changed from -1 to 0
         switch(value)
         {
             case "donation":

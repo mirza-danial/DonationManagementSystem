@@ -13,6 +13,11 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
@@ -25,43 +30,38 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
-    
     public static Organization org;
     public static Admin admin;
-    public Login() {
-        
+    
+    public Login() throws SQLException, Exception {
         // Test values will be changed when database will be entered
-       
-        org = new Organization(1, "FastCare", "Charity Org");
 
-        Admin a = org.createNewAdmin();
-        a.setName("Raphy");
-        a.setOrg(org);
-        a.setUserName("raphy_n");
-        a.setPassword("123");
+//        org = new Organization(1, "FastCare", "Charity Org");
         
-        Donor d = a.createNewDonor();
-        d.setName("Danial");
-        d.setAddr("Model Town", "Lahore", "Pakistan");
-        d.addPhoneNum("090078601");
-        
-        
-        Project p = a.createNewProject();
-        p.setName("TCF Schools");
-        p.setAddr("Line 1", "Lahore", "Pakistan");
-        
-        // this code will be uncommented after loadDBS
-        
-//        if(org == null)
-//        {
-//            NoOrganizationFound o =new NoOrganizationFound();
-//            o.setVisible(true);
-//            this.dispose();
-//        }
+        // Get all organizations list from DB
+        List<Organization> allOrgs = new ArrayList<>();
+        PersistentDB db = new PersistentDB();
+        db.connect();
+        db.loadAllOrgsFromDB(allOrgs);
+        if(allOrgs.size() > 0)
+        {
+            org = allOrgs.get(0);   //Use the first organization if only one
+            //Load all components of selected Organization
+            db.setOrg(org);
+            db.loadFromDB();
+            db.disconnect();
+        }
+//        org = null;
+        if (org == null) {
+            NoOrganizationFound o = new NoOrganizationFound();
+            o.setVisible(true);
+            this.dispose();
+            return;
+        }
+
         setTitle("Donation Management System");
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/donation.png")));
         initComponents();
-            
     }
 
     /**
@@ -196,38 +196,31 @@ public class Login extends javax.swing.JFrame {
 
     private void LoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginMouseClicked
         // TODO add your handling code here:
-       String u_name = userNameField.getText();
-       String password = String.valueOf(passwordField.getPassword());
-        
-       if(!u_name.isEmpty() && !password.isEmpty())
-       {
-           Admin a = org.getAdmin(u_name, password);
-           
-           if(a != null )
-           {
-               System.out.println("Login Successfull");
-               
-               admin = a;
-               
-               Dashboard mainPage = new Dashboard();
-               mainPage.setVisible(true);
-               
-               this.dispose();
-               
-           }
-           else
-           {
-               message.setText("Your username or password is incorrect!");
-           }
-       }
-       else{
-           message.setText("Some fields are empty!");
-       }
-        
+        String u_name = userNameField.getText();
+        String password = String.valueOf(passwordField.getPassword());
+
+        if (!u_name.isEmpty() && !password.isEmpty()) {
+            Admin a = org.getAdmin(u_name, password);
+
+            if (a != null) {
+                System.out.println("Login Successfull");
+
+                admin = a;
+
+                Dashboard mainPage = new Dashboard();
+                mainPage.setVisible(true);
+
+                this.dispose();
+
+            } else {
+                message.setText("Your username or password is incorrect!");
+            }
+        } else {
+            message.setText("Some fields are empty!");
+        }
+
     }//GEN-LAST:event_LoginMouseClicked
 
-    
-    
     /**
      * @param args the command line arguments
      */
@@ -258,11 +251,15 @@ public class Login extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                try {
+                    new Login().setVisible(true);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
         });
     }
- 
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background;

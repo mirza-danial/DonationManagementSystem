@@ -4,10 +4,15 @@
  * and open the template in the editor.
  */
 package GUI;
-import Database.PersistentDB;
+
+import Model.PersistentDB;
 import Model.*;
 import java.awt.Color;
 import java.awt.Toolkit;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Danial
@@ -18,24 +23,48 @@ public class ProjectDetails extends javax.swing.JFrame {
      * Creates new form ProjectDetails
      */
     private int projectID;
-    
-    public ProjectDetails(int ID)
-    {
+
+    public ProjectDetails(int ID) {
         this();
         projectID = ID;
         
+        //Set up allocated donations table
+        List<Donation> record = Login.admin.getAllDonations();
+        String[][] data = new String[record.size()][3];
+
+        int i = 0;
+        for (Donation d : record) {
+            if (d.getAssociatedProject() != null && projectID == d.getAssociatedProject().getId()) {
+                data[i][0] = String.valueOf(d.getId());
+                data[i][1] = String.valueOf(d.getValue());
+                data[i][2] = d.getSourceDonor().getName();
+                i++;
+            }
+        }
+        DonationGrid.setModel(new javax.swing.table.DefaultTableModel(data, new String[]{"Donation ID", "Worth", "Donor"})        {
+            boolean[] canEdit = new boolean[]{
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit[columnIndex];
+            }
+        });
+
+        jScrollPane1.setViewportView(DonationGrid);
+
         Project p = Login.org.getProject(projectID);
         projectNameLabel.setText(p.getName());
         projectDescriptionLabel.setText(p.getDescritpion());
-        projectAddressLabel.setText((p.getAddr()!= null)? p.getAddr().toString() : "N/A");
+        projectAddressLabel.setText((p.getAddr() != null) ? p.getAddr().toString() : "N/A");
     }
-    
+
     public ProjectDetails() {
         setTitle("Donation Management System");
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/donation.png")));
         initComponents();
         nameLabel.setText(Login.admin.getName());
-        
+
         //add window closing listener
         this.addWindowListener(new WindowCloser());
     }
@@ -75,9 +104,11 @@ public class ProjectDetails extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         updateProject = new javax.swing.JLabel();
         removeProject = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        DonationGrid = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(799, 717));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -352,6 +383,16 @@ public class ProjectDetails extends javax.swing.JFrame {
             }
         });
 
+        DonationGrid.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        DonationGrid.setEnabled(false);
+        DonationGrid.setSelectionBackground(new java.awt.Color(255, 83, 61));
+        DonationGrid.setSelectionForeground(new java.awt.Color(15, 22, 38));
+        DonationGrid.setShowVerticalLines(false);
+        jScrollPane1.setViewportView(DonationGrid);
+
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
+        jLabel1.setText("Table of Allocated Donations");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -369,6 +410,11 @@ public class ProjectDetails extends javax.swing.JFrame {
                                 .addGap(28, 28, 28)
                                 .addComponent(back))
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(87, 87, 87)
+                                .addComponent(updateProject, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(91, 91, 91)
+                                .addComponent(removeProject, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(54, 54, 54)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -379,13 +425,14 @@ public class ProjectDetails extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel14)
                                         .addGap(26, 26, 26)
-                                        .addComponent(projectAddressLabel))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(108, 108, 108)
-                                .addComponent(updateProject, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(73, 73, 73)
-                                .addComponent(removeProject, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(projectAddressLabel))
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addContainerGap(76, Short.MAX_VALUE))))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(207, 207, 207)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(46, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -393,27 +440,30 @@ public class ProjectDetails extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(back)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(projectNameLabel)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(message, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(projectDescriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(projectAddressLabel))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(updateProject, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(removeProject, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(212, 212, 212))))
+                .addGap(39, 39, 39)
+                .addComponent(projectNameLabel)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(message, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(projectDescriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(projectAddressLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(updateProject, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(removeProject, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(179, 179, 179))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(336, 336, 336)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(249, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -462,7 +512,7 @@ public class ProjectDetails extends javax.swing.JFrame {
 
     private void manageOrganizationMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseEntered
         // TODO add your handling code here:
-        Color highlight = new Color(255,83,61);
+        Color highlight = new Color(255, 83, 61);
         manageOrganization.setForeground(highlight);
         manageOrganizationBar.setOpaque(true);
         manageOrganizationBar.repaint();
@@ -470,7 +520,7 @@ public class ProjectDetails extends javax.swing.JFrame {
 
     private void manageOrganizationMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseExited
         // TODO add your handling code here:
-        Color dullGray = new Color(200,200,200);
+        Color dullGray = new Color(200, 200, 200);
         manageOrganizationBar.setOpaque(false);
         manageOrganizationBar.repaint();
         manageOrganization.setForeground(dullGray);
@@ -548,9 +598,9 @@ public class ProjectDetails extends javax.swing.JFrame {
         // TODO add your handling code here:
         UpdateProject up = new UpdateProject(projectID);
         up.setVisible(true);
-        
+
         this.dispose();
-      
+
     }//GEN-LAST:event_updateProjectMouseClicked
 
     private void updateProjectMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateProjectMouseEntered
@@ -570,7 +620,7 @@ public class ProjectDetails extends javax.swing.JFrame {
         Project p = Login.org.getProject(projectID);
         Login.admin.removeProject(p);
         backMouseClicked(null);
-        
+
     }//GEN-LAST:event_removeProjectMouseClicked
 
     private void removeProjectMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeProjectMouseEntered
@@ -588,25 +638,26 @@ public class ProjectDetails extends javax.swing.JFrame {
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
         PersistentDB db = new PersistentDB();
-        try
-        {
+        try {
             db.setOrganizationAndAdmin(Login.org, Login.admin);
             db.connect();
             db.saveToDB();
             db.disconnect();
-        }
-        catch(Exception ex)
-        {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         System.out.println("Saving changes...");
         Login.org = null;
         Login.admin = null;
 
-        Login log = new Login();
-        log.setVisible(true);
-        this.dispose();
-
+        Login log;
+        try {
+            log = new Login();
+            log.setVisible(true);
+            this.dispose();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }//GEN-LAST:event_jLabel2MouseClicked
 
     /**
@@ -645,12 +696,14 @@ public class ProjectDetails extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable DonationGrid;
     private javax.swing.JLabel Home;
     private javax.swing.JLabel HomeBar;
     private javax.swing.JLabel ManageDonationBar;
     private javax.swing.JLabel ManageDonorsBar;
     private javax.swing.JLabel ManageProjectBar;
     private javax.swing.JLabel back;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
@@ -659,6 +712,7 @@ public class ProjectDetails extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel manageDonations;
     private javax.swing.JLabel manageDonors;
     private javax.swing.JLabel manageOrganization;

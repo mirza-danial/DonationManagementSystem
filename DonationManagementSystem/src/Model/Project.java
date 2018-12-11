@@ -37,6 +37,7 @@ public class Project extends Entity {
         return volunteersInProject.add(v);
     }
     public boolean addDonation(Donation d){
+        d.setAssociatedProject(this);
         return donationsForProject.add(d);
     }
     

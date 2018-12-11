@@ -1,0 +1,36 @@
+INSERT INTO OOAD.ORGANIZATION (ID, STARTDATE, ISACTIVE, "NAME", DESCRIPTION, PHONE_NUMBERS, ADDRESS) 
+	VALUES (1, '2018-12-09', true, 'Fast Care', 'Charity Org', '1234567', 'dwefrferer, null, null');
+
+	INSERT INTO OOAD."ADMIN" (ID, ORGID, "NAME", DESCRIPTION, PHONE_NUMBERS, ADDRESS, USERNAME, PASSWORD) 
+	VALUES (1, 1, 'Raphael', 'The psycho humble', 'my number', 'My secret residence, null, null', 'raphy_n', '123');
+INSERT INTO OOAD."ADMIN" (ID, ORGID, "NAME", DESCRIPTION, PHONE_NUMBERS, ADDRESS, USERNAME, PASSWORD) 
+	VALUES (2, 1, 'Danial', 'The GUI Builder', '4.0', 'Apkay Ghar, null, null', 'dany', '123');
+INSERT INTO OOAD."ADMIN" (ID, ORGID, "NAME", DESCRIPTION, PHONE_NUMBERS, ADDRESS, USERNAME, PASSWORD) 
+	VALUES (3, 1, 'Haider Baig', NULL, NULL, 'null, null, null', 'haider', '123');
+
+INSERT INTO OOAD.PROJECT (ID, ORGID, "NAME", DESCRIPTION, PHONE_NUMBERS, ADDRESS) 
+	VALUES (1, 1, 'TCF Foundation', 'Educational Project', '123456789999', 'dedew, edwefw, defr3fr');
+INSERT INTO OOAD.PROJECT (ID, ORGID, "NAME", DESCRIPTION, PHONE_NUMBERS, ADDRESS) 
+	VALUES (2, 1, 'Green Project', 'Environmental', '111111', 'dwedrefrefe, frferf, null');
+INSERT INTO OOAD.PROJECT (ID, ORGID, "NAME", DESCRIPTION, PHONE_NUMBERS, ADDRESS) 
+	VALUES (201, 1, 'TCF Schools', NULL, NULL, 'Line 1, Lahore, Pakistan');
+
+INSERT INTO OOAD.VOLUNTEER (ID, ORGID, PROJ_ID, "NAME", DESCRIPTION, PHONE_NUMBERS, ADDRESS) 
+	VALUES (1, 1, 1, 'Volly1', 'Fastian', '1122222', 'swdeded, edeere, erefef');
+INSERT INTO OOAD.VOLUNTEER (ID, ORGID, PROJ_ID, "NAME", DESCRIPTION, PHONE_NUMBERS, ADDRESS) 
+	VALUES (2, 1, 2, 'Volunteer', 'Masoom Bacha', '1111111', 'deded, dedefd, edefe');
+
+INSERT INTO OOAD.DONOR (ID, ORGID, "NAME", DESCRIPTION, PHONE_NUMBERS, ADDRESS) 
+	VALUES (1, 1, 'VikiDonor', 'FML
+', 'wsdedrff', 'efrft, lahore, paki');
+INSERT INTO OOAD.DONOR (ID, ORGID, "NAME", DESCRIPTION, PHONE_NUMBERS, ADDRESS) 
+	VALUES (2, 1, 'DanyDonor', 'ferfrfr', 'deffrf', 'defrfrrfrf, dedfrff, dedefr');
+INSERT INTO OOAD.DONOR (ID, ORGID, "NAME", DESCRIPTION, PHONE_NUMBERS, ADDRESS) 
+	VALUES (303, 1, 'Danial', NULL, '090078601', 'Model Town, Lahore, Pakistan');
+
+INSERT INTO OOAD.DONATION (ID, ORGID, DONOR_ID, PROJ_ID, "VALUE", "TYPE") 
+	VALUES (2, 1, 2, 1, 500.0, 'Cash');
+INSERT INTO OOAD.DONATION (ID, ORGID, DONOR_ID, PROJ_ID, "VALUE", "TYPE") 
+	VALUES (3, 1, 1, 2, 400.0, 'Cash');
+INSERT INTO OOAD.DONATION (ID, ORGID, DONOR_ID, PROJ_ID, "VALUE", "TYPE") 
+	VALUES (401, 1, 303, 201, -100.0, 'Cash');

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package GUI;
-import Database.PersistentDB;
+import Model.PersistentDB;
 import Model.*;
 import java.awt.Toolkit;
 /**
@@ -44,8 +44,10 @@ public class CreateOrganization extends javax.swing.JFrame {
         organizationPhoneField = new javax.swing.JTextField();
         lineField = new javax.swing.JTextField();
         countryField = new javax.swing.JTextField();
-        organizationDescriptionField = new javax.swing.JTextField();
         cityField = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        organizationDescriptionField = new javax.swing.JTextArea();
+        message = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,19 +121,20 @@ public class CreateOrganization extends javax.swing.JFrame {
             }
         });
 
-        organizationDescriptionField.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        organizationDescriptionField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                organizationDescriptionFieldActionPerformed(evt);
-            }
-        });
-
         cityField.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         cityField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cityFieldActionPerformed(evt);
             }
         });
+
+        organizationDescriptionField.setColumns(20);
+        organizationDescriptionField.setRows(5);
+        jScrollPane1.setViewportView(organizationDescriptionField);
+
+        message.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        message.setForeground(new java.awt.Color(255, 0, 0));
+        message.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -142,27 +145,31 @@ public class CreateOrganization extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(209, 209, 209))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(296, 296, 296)
-                .addComponent(yes, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(296, 296, 296)
+                        .addComponent(yes, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(152, 152, 152)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(message, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8))
+                                .addGap(51, 51, 51)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(countryField, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                                    .addComponent(lineField, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                                    .addComponent(organizationPhoneField, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                                    .addComponent(organizationNameField, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                                    .addComponent(cityField, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane1))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(152, 152, 152)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8))
-                .addGap(51, 51, 51)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(organizationDescriptionField, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(countryField, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lineField, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(organizationPhoneField, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(organizationNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cityField, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,14 +196,13 @@ public class CreateOrganization extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel7)
                     .addComponent(countryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel8))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(organizationDescriptionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)
+                    .addComponent(jLabel8)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addComponent(message)
+                .addGap(40, 40, 40)
                 .addComponent(yes, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
         );
@@ -225,15 +231,22 @@ public class CreateOrganization extends javax.swing.JFrame {
         String city = cityField.getText();
         String country = countryField.getText();
         String phone = organizationPhoneField.getText();
+        message.setText("");
+        if (name.isEmpty() || description.isEmpty() || line.isEmpty() || city.isEmpty() || country.isEmpty() || phone.isEmpty())
+        {
+            message.setText("Some important fields are empty!");
+        }                
+        else
+        {
         
-        Organization org = new Organization(1,name,description);
-        org.setAddr(line, city, country);
-        org.addPhoneNum(phone);
-        
-        CreateAdmin ca =new CreateAdmin(org);
-        ca.setVisible(true);
-        this.dispose();
-        
+            Organization org = new Organization(1,name,description);
+            org.setAddr(line, city, country);
+            org.addPhoneNum(phone);
+
+            CreateAdmin ca =new CreateAdmin(org);
+            ca.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_yesMouseClicked
 
     private void yesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_yesMouseEntered
@@ -263,10 +276,6 @@ public class CreateOrganization extends javax.swing.JFrame {
     private void countryFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_countryFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_countryFieldActionPerformed
-
-    private void organizationDescriptionFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_organizationDescriptionFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_organizationDescriptionFieldActionPerformed
 
     private void cityFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cityFieldActionPerformed
         // TODO add your handling code here:
@@ -318,8 +327,10 @@ public class CreateOrganization extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField lineField;
-    private javax.swing.JTextField organizationDescriptionField;
+    private javax.swing.JLabel message;
+    private javax.swing.JTextArea organizationDescriptionField;
     private javax.swing.JTextField organizationNameField;
     private javax.swing.JTextField organizationPhoneField;
     private javax.swing.JLabel yes;
